@@ -276,7 +276,8 @@ h6 {
   background: url("../img/hero-bg.jpg") no-repeat;
   background-size: cover;
   position: relative;
-  text-align: center;
+  width:auto;
+  height: auto;
 }
 
 @media (min-width: 992px) {
