@@ -38,7 +38,7 @@
         <input  class="form-check-input" type="checkbox" role="switch" aria-describedby="emailHelp" name="activo" value="1">
         <div id="emailHelp" class="form-text">Activo</div>
         </div> 
-            <button type="submit" class="btn btn-primary">Guardar Rol</button>
+            <button type="submit" class="btn btn-primary">Guardar Sector</button>
             <a class="btn btn-danger" href=<? echo("/proyecto/view/seguridad/sema_usuario_i1/index.php?id=".$_GET['id']); ?>> Cancelar </a>
         </form>
     </div>

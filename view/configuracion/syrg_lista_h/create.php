@@ -63,7 +63,7 @@
       </div>
 
             <button type="submit" class="btn btn-primary">Guardar Lista</button>
-            <a class="btn btn-danger" href="/proyecto/index.php#listas"> Cancelar </a>
+            <a class="btn btn-danger" href="/proyecto/view/configuracion/syrg_lista_h/index.php"> Cancelar </a>
         </form>
     </div>
     </section><!-- End About Section -->

@@ -20,7 +20,7 @@
                   </div>
             
                   <button type="submit" class="btn btn-primary">Guardar persona</button>
-                  <a class="btn btn-danger" href="/proyecto/index.php#personas"> Cancelar </a>
+                  <a class="btn btn-danger" href="/proyecto/view/adma_persona/index.php"> Cancelar </a>
             </form>
       </div>
     </section><!-- End About Section -->

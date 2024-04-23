@@ -16,6 +16,6 @@ $el_row["baja"]= 0;
 $el_row["usuarioid"]= 12;
 $el_row["fecharegistro"]= date('Ymd');
 $prueba_1= $db->ConfiguracionProcedimientoAlmacenado("syrg_lista_h",1,$el_row);
-if ($prueba_1 > 0) {header("Location:/proyecto/index.php#listas");
+if ($prueba_1 > 0) {header("Location:/proyecto/view/configuracion/syrg_lista_h/index.php");
 }else{header("Location:crear.php");}
 ?>

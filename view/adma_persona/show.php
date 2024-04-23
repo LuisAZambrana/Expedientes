@@ -24,7 +24,7 @@
         </div>
 
         <div class="pb-3">
-            <a href="/proyecto/index.php#personas" class="btn btn-primary"> Regresar </a>
+            <a href="/proyecto/view/adma_persona/index.php" class="btn btn-primary"> Regresar </a>
             <a href="<?= $ruta ?>edit.php?id=<?= $date[0]?>" class="btn btn-success"> Actualizar </a>
             <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"> Eliminar </a>
             <!-- Button trigger modal -->
