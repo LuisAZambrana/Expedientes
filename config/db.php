@@ -124,6 +124,12 @@
                                         case "bit":
                                             $oProcedimiento->bindParam(':_'.$dato_['CampoId'], $objeto[$dato_['CampoId']],PDO::PARAM_BOOL);
                                             break;
+                                        case "blob":
+                                            $oProcedimiento->bindParam(':_'.$dato_['CampoId'], $objeto[$dato_['CampoId']],PDO::PARAM_LOB);
+                                            break;
+                                        case "longblob":
+                                            $oProcedimiento->bindParam(':_'.$dato_['CampoId'], $objeto[$dato_['CampoId']],PDO::PARAM_LOB);
+                                            break;
                                         
                                         default:
                                             $oProcedimiento->bindParam(':_'.$dato_['CampoId'], $objeto[$dato_['CampoId']],PDO::PARAM_STR);
@@ -784,13 +790,28 @@
                                    
                                 }
                                 else {
-                                    $configuracion.="<td>".$row_d[$i]."</td>
-                                    ";   
+                                    if ($row['html']== 1){
+                                        $configuracion.="<td><div>".htmlentities($row_d[$i])."</div></td>
+                                        ";  
+                                    }
+                                    else
+                                    {
+                                        $configuracion.="<td>".$row_d[$i]."</td>
+                                        ";   
+                                    }
+                                  
                                 } 
                             }
                             else {
-                                $configuracion.="<td>".$row_d[$i]."</td>
-                                ";   
+                                if ($row['html']== '1'){
+                                    $configuracion.="<td>".nl2br($row_d[$i])."</td>
+                                    "; 
+                                }
+                                else {
+                                    $configuracion.="<td>".$row_d[$i]."</td>
+                                    ";   
+                                }
+                               
                             }
                             $i = $i+ 1;
                         }
@@ -857,6 +878,117 @@
                 return "Error: " . $e->getMessage();
             }
         }
+
+        public function configurar_grilla_sin_control_junto($grillaid,$condicion){
+            try{
+                $sql = "SELECT * FROM syma_grilla_h where grillaid=".$grillaid;
+                $lagrilla = $this->fcGetSQL($sql,1,2);
+                $sql_1 = "SELECT * FROM syma_grilla_i0 where visible = 1 and baja = 0 and grillaid =".$grillaid;
+                $sql_1.= " ORDER BY visibleindex ";
+                $items = $this->fcGetSQL($sql_1,1,0);
+               
+                $columnas="";
+                $datos="";
+                $select = "SELECT ";
+                $configuracion='<table id="tablax_'.$lagrilla['grillaid'].'" class="display nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                 ';
+                 if ($items): 
+                    foreach($items as $row): 
+                        $columnas.='<th>'.$row['caption'].'</th>
+                        ';
+                        //debemos recorrer los datos para encontrar los datos de cada columna.
+                        $select.=''.$row['fieldname'].',';
+
+                    endforeach;
+                else:
+                 return '';
+                endif; 
+                $select= substr($select, 0, -1);
+                $sql_2 =  $select." FROM ".$lagrilla['tabla']." WHERE ".$condicion;
+                $losdatos= $this->fcGetSQL($sql_2,1,0);
+                $configuracion.=$columnas."</tr> 
+                </thead>
+                <tbody> 
+                ";
+                $i=0;
+                if ($losdatos) {
+                    foreach($losdatos as $row_d): 
+                        $i=0;      
+                        $configuracion.='<tr>
+                        ';
+                       
+                        foreach($items as $row){
+                            if($row['combolistaid']){
+                                if($row['combolistaid'] != 0){
+                                    //$configuracion.="<td>".$row_d[$i]."</td>
+                                    //";
+                                    $configuracion.= "<td>".$this->configurar_lista_grilla($row['combolistaid'],$row_d[$i])."</td>
+                                    ";
+                                   
+                                }
+                                else {
+                                    if ($row['html']== 1){
+                                        $configuracion.="<td><div>".htmlentities($row_d[$i])."</div></td>
+                                        ";  
+                                    }
+                                    else
+                                    {
+                                        $configuracion.="<td>".$row_d[$i]."</td>
+                                        ";   
+                                    }
+                                  
+                                } 
+                            }
+                            else {
+                                if ($row['html']== '1'){
+                                    $configuracion.="<td>".nl2br($row_d[$i])."</td>
+                                    "; 
+                                }
+                                else {
+                                    $configuracion.="<td>".$row_d[$i]."</td>
+                                    ";   
+                                }
+                               
+                            }
+                            $i = $i+ 1;
+                        }
+                        $configuracion.="
+                        </tr>
+                        ";
+                    endforeach; }
+
+                    $i = $i -1;
+                $configuracion.="</tbody>
+                </table>
+                ";
+                $configuracion.=' <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+                <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js">
+                </script>      
+                <script src="https://cdn.datatables.net/responsive/3.0.1/js/dataTables.responsive.js">
+                </script>
+                <script src="https://cdn.datatables.net/responsive/3.0.1/js/responsive.dataTables.js">
+                </script>';
+                $configuracion.=" 
+                <script>
+                    $(document).ready(function () {
+                    $('#tablax_".$lagrilla['grillaid']."').DataTable({
+                    responsive: true,
+                    
+                        });
+                        });
+                        </script>
+                        ";
+                return $configuracion; 
+            }
+            catch(PDOException $e) 
+            {
+                 
+                return "Error: " . $e->getMessage();
+            }
+        }
+
 
         public function configurar_grilla_param_alta($grillaid,$condicion,$ruta,$condicion_alta){
             try{
@@ -1146,6 +1278,88 @@
                 return "Error: " . $e->getMessage();
             }
         }
+
+        public function configurar_lista_solo_opciones($listaid,$condicion,$nombre,$valor){
+            try{
+                $sql = "SELECT * FROM syrg_lista_h WHERE baja = 0 and listaid=".$listaid;
+                $lista = $this->fcGetSQL($sql,1,2);
+                $resultado=' ';
+                $seleccion= 0;
+                if ($valor) {
+                    $seleccion= 1;}
+                else{
+                    $resultado.= ' <option selected>Ninguno...</option>
+                    ';
+        
+                }
+                $switch="";
+                if($lista['listafija']==0){
+                    $sql_items= "SELECT * FROM syrg_lista_i0 WHERE baja = 0 and listaid=".$listaid;
+                    $items = $this->fcGetSQL($sql_items,1,0);
+                    if ($condicion){
+                        $sql_datos = $condicion;
+                    }
+                    else{
+                        $sql_datos = $lista['recordsource'];
+                    }
+                    $datos = $this->fcGetSQL($sql_datos,1,0);
+                    foreach($datos as $el_dato){
+                        $switch ='<option value="';
+                        foreach($items as $item){
+                           
+                            if ($item['valuemember'] == 1){
+                              
+                                $switch.=  $el_dato[$item['campoid']].'"';
+                                if ($seleccion == 1){
+                                    if ($valor == $el_dato[$item['campoid']]){
+                                        $switch.= 'selected' ; 
+                                    }
+                                  
+                                }
+                                $switch.='>' ;   
+                            }
+                            if ($item['displaymember'] == 1){
+                              
+                                $switch.= $el_dato[$item['campoid']].'</option>
+                                ';   
+                                echo($switch);
+                            }
+                           
+                        }
+                    }
+                  
+                }
+                else{
+                    $sql_items= "SELECT * FROM syrg_lista_i1 WHERE baja = 0 and listaid=".$listaid;
+                    $items = $this->fcGetSQL($sql_items,1,0);
+                    
+                    foreach($items as $item){
+                        $switch='<option value="';
+                        $switch.=$item['valuemember'].'"';
+                        if ($seleccion == 1){
+                            if ($valor == $item['valuemember']){
+                                $switch.= 'selected'  ;
+                            }
+                        }
+                        $switch.='>' ;   
+                        $switch.=$item['displaymember'].'</option>
+                        ';   
+                        echo($switch);
+                    }
+                }
+                
+                $resultado.= $switch;
+                return $resultado;
+
+            }
+
+        
+        catch(PDOException $e) 
+        {
+             
+            return "Error: " . $e->getMessage();
+        }
+    }
 
         public function generar_menu($usuarioname, $elusuarioid){
         try{  
