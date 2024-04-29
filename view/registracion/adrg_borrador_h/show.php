@@ -27,7 +27,7 @@
       $control_p="create.php?id=";
     }
 
-    $sql_destino = "SELECT destinoid from adrg_borrador_i1 where baja=0 and borradorid =". $_GET['id'];
+    $sql_destino = "SELECT destinoid from adrg_borrador_i1 where baja= 0 and borradorid =". $_GET['id'];
     $row_destino = $obj->fcGetSQL($sql_destino,1,2);
     $control_d="";
     if ($row_destino){

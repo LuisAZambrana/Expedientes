@@ -11,7 +11,7 @@ $(document).ready(function(){
         $.ajax({
             type: 'POST',
             url: 'buscar_opciones.php',
-            data: {busqueda: valorBusqueda},
+            data: 'busqueda='+valorBusqueda,
             success: function(response){
                 $('#personaid_destino').html(response);
             }
@@ -19,6 +19,19 @@ $(document).ready(function(){
     });
 });
 
+$(document).ready(function(){
+    $('#busquedasector').on('keyup', function(){
+        var valorBusqueda = $(this).val();
+        $.ajax({
+            type: 'POST',
+            url: 'buscar_opciones_sector.php',
+            data: 'busqueda='+valorBusqueda,
+            success: function(response){
+                $('#sectorid_destino').html(response);
+            }
+        });
+    });
+});
 
 
 
@@ -37,6 +50,11 @@ $(document).ready(function(){
                 }
             });
             $('#sectorid_destino').html('<option value="">Sin datos</option>');
+            document.getElementById('sectorid_destino').disabled = true;
+            document.getElementById('busquedasector').disabled = true;
+            document.getElementById('busquedasector').value='';
+            document.getElementById('busqueda').disabled = false;
+            document.getElementById('personaid_destino').disabled = false;
           }
           else {
             $.ajax({
@@ -49,11 +67,16 @@ $(document).ready(function(){
                 }
             });
             $('#personaid_destino').html('<option value="">Sin datos</option>');
+            document.getElementById('busqueda').disabled = true;
+            document.getElementById('busqueda').value='';
+            document.getElementById('personaid_destino').disabled = true;
+            document.getElementById('sectorid_destino').disabled = false;
+            document.getElementById('busquedasector').disabled = false;
           }
             
         }else{
             $('#personaid_destino').html('<option value="">seleccione tipo de destino</option>');
-            $('#prosectorid_destinoductos').html('<option value="">seleccione tipo de destino</option>');
+            $('#sectorid_destino').html('<option value="">seleccione tipo de destino</option>');
         }
     });
 });
@@ -83,16 +106,16 @@ $(document).ready(function(){
       <div id="emailHelp" class="form-text">Tipo destino</div>
       </div>
       <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Usuario destino</label>
-     
+      <label for="exampleInputEmail1" class="form-label">Usuario destino</label> 
+      <label class="input-group-text" for="personaid_destino"><input type="text" id="busqueda" class="form-control" placeholder="Buscar opción..."></label>
       <select class="form-select" id="personaid_destino" name="personaid_destino"> 
-      <input type="text" id="busqueda" placeholder="Buscar opción...">
         <option value="">debe seleccionar primero un tipo de destino</option>
         </select>
       <div id="emailHelp" class="form-text">Ingrese el usuario</div>
       </div>
       <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Sector destino</label>
+      <label class="input-group-text" for="sectorid_destino"><input type="text" id="busquedasector" class="form-control" placeholder="Buscar opción..."></label>
       <select class="form-select" id="sectorid_destino" name="sectorid_destino">
         <option value="">debe seleccionar primero un tipo de destino</option>
         </select>

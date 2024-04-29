@@ -6,7 +6,7 @@
     $ruta_padre="/proyecto/view/registracion/adrg_borrador_h/";
     $ruta_raiz="/proyecto/";
 
-    $rows = $obj->fcGetSQL("SELECT * FROM adrg_borrador_i1  where destinoid =".$_GET['id'],1,2);
+    $rows = $obj->fcGetSQL("SELECT * FROM adrg_borrador_i1  where baja = 0 and borradorid =".$_GET['id'],1,2);
 ?>
 <section id="destino" class="about">
       <div class="container" data-aos="fade-up">
@@ -36,7 +36,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
-                  <a href="<?= $ruta ?>delete.php?id=<?= $_GET['id']?>" type="button" class="btn btn-danger">Eliminar!</a>
+                  <a href="<?= $ruta ?>delete.php?id=<?= $rows['borradorid']?>" type="button" class="btn btn-danger">Eliminar!</a>
                   </div>
         </div>
       </div>

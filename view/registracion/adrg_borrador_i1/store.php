@@ -5,8 +5,16 @@ $db = new db();
 $el_row = $db->fcGetSQL("SELECT 'a' as abm, adrg_borrador_i1.* FROM adrg_borrador_i1  where destinoid = -1",1,0);
 $el_row["abm"]="a";
 $el_row["tipodestinoid"]= $_POST['tipodestinoid'];
-$el_row["personaid_destino"]= $_POST['personaid_destino'];
-$el_row["sectorid_destino"]= $_POST['sectorid_destino'];
+
+if ($_POST['tipodestinoid']==1){
+    $el_row['personaid_destino']= $_POST['personaid_destino'];
+  
+}
+else {
+    
+    $el_row['sectorid_destino']= $_POST['sectorid_destino'];
+}
+
 $el_row["borradorid"]= $_POST['borradorid'];
 $el_row["baja"]= 0;
 $el_row["usuarioid"]= 12;
