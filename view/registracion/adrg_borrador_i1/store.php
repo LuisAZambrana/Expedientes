@@ -14,10 +14,10 @@ else {
     
     $el_row['sectorid_destino']= $_POST['sectorid_destino'];
 }
-
+session_start();
 $el_row["borradorid"]= $_POST['borradorid'];
 $el_row["baja"]= 0;
-$el_row["usuarioid"]= 12;
+$el_row["usuarioid"]= $_SESSION['usuarioid'];
 $el_row["fecharegistro"]= date('Ymd');
 $prueba_1= $db->ConfiguracionProcedimientoAlmacenado("adrg_borrador_i1",1,$el_row);
 if ($prueba_1 > 0) {header("Location:/proyecto/view/registracion/adrg_borrador_i1/show.php?id=".$_POST['borradorid']);

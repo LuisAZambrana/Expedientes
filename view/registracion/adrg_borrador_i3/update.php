@@ -8,7 +8,9 @@
      $el_row["formularioid"]= $_POST["formularioid"];
      $el_row["menuid"]= $_POST["menuid"];
      $el_row["baja"]= 0;
-     $el_row["usuarioid"]= 12;
+     session_start();
+
+     $el_row["usuarioid"]= $_SESSION['usuarioid'];
      $el_row["fecharegistro"]= date('Ymd');
      $prueba_1= $obj->ConfiguracionProcedimientoAlmacenado("sema_objeto_h",1,$el_row);
      if ($prueba_1 > 0) {header("Location:/proyecto/view/seguridad/sema_objeto_h/show.php?id=".$_POST["menuid"]);

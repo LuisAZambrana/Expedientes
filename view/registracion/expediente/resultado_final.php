@@ -36,7 +36,7 @@
   <div class="tab-pane fade show active" id="pills-borrador" role="tabpanel" aria-labelledby="pills-home-tab">
         <div class="table-responsive">
         <?php
-           $query = "SELECT '".$ruta."generar_expediente.php?id="."' as url, 'bx bx-archive' as icon";
+           $query = "SELECT '".$ruta."menu.php?id="."' as url, 'bx bx-archive' as icon";
            $control= $prueba->fcGetSQL($query,1,0);
           echo($prueba->configurar_grilla_personalizado_junto(22, $where,$control));
         ?>

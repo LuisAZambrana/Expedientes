@@ -9,7 +9,8 @@
      $el_row["fecha_creacion"]= date('YmdHis');
      $el_row["estadoid"]=1;
      $el_row["baja"]= 0;
-     $el_row["usuarioid"]= 12;
+     session_start();
+     $el_row["usuarioid"]= $_SESSION['usuarioid'];
      $el_row["fecharegistro"]= date('Ymd');
      $prueba_1= $obj->ConfiguracionProcedimientoAlmacenado("adrg_borrador_h",1,$el_row);
      if ($prueba_1 > 0) {header("Location:/proyecto/view/registracion/adrg_borrador_h/show.php?id=".$prueba_1);

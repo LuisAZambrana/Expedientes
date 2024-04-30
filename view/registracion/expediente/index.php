@@ -35,8 +35,9 @@
       $query_2 = "SELECT '".$ruta."reporte.php?id=' as url, 'bx bx-printer' as icon";
       $query="SELECT * FROM (".$query_0." UNION ALL ".$query_1." UNION ALL ".$query_2.") AS derived_table_alias";
       $control= $prueba->fcGetSQL($query,1,0);
+     
 
-     echo($prueba->configurar_grilla_personalizado(26,"baja = 0 ",$control));
+     echo($prueba->configurar_grilla_personalizado(26,"baja = 0 and usuarioid = ".$_SESSION['usuarioid'],$control));
 ?>
 </div>
 </div>

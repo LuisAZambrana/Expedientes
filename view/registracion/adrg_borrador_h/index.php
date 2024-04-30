@@ -15,7 +15,8 @@
 
 <div class="table-responsive">
 <?php
-      echo($prueba->configurar_grilla(22,"baja = 0",$ruta));
+      $where = " and borradorid not in (select borradorid from adrg_expediente_h where baja = 0)";
+      echo($prueba->configurar_grilla(22,"baja = 0 and usuarioid=".$_SESSION['usuarioid']. $where,$ruta));
 
       
 ?>

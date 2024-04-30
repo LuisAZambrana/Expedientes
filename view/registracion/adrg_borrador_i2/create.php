@@ -5,6 +5,8 @@
 ?> 
 <script>
 
+
+
 $(document).ready(function(){
     $('#busquedasector').on('keyup', function(){
         var valorBusqueda = $(this).val();
