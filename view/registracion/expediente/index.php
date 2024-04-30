@@ -16,7 +16,10 @@
 ?>
 <section id="expedientes" class="about">
 <div class="container" data-aos="fade-up">
-<h2 class="text-center"> Mis expedientes </h2>
+<div class="section-title">
+          <h2>Mis Expedientes</h2>
+          <p>Visualización de los Expedientes generados por el usuario.</p>
+        </div>
 <div class="table-responsive">
 <?php 
     if ($mostrar_nuevo == 1) {

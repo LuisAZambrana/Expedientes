@@ -6,7 +6,7 @@
     $ruta_padre="/proyecto/view/registracion/adrg_borrador_h/";
     $ruta_raiz="/proyecto/";
 
-    $rows = $obj->fcGetSQL("SELECT * FROM adrg_borrador_i0  where borradorid =".$_GET['id'],1,2);
+    $rows = $obj->fcGetSQL("SELECT * FROM adrg_borrador_i3  where borradorid =".$_GET['id'],1,2);
 ?>
 <section id="embebido" class="about">
       <div class="container" data-aos="fade-up">

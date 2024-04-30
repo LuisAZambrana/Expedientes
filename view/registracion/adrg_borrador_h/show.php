@@ -6,10 +6,12 @@
     $ruta_i0="/proyecto/view/registracion/adrg_borrador_i0/";
     $ruta_i3="/proyecto/view/registracion/adrg_borrador_i3/";
     $ruta_i1="/proyecto/view/registracion/adrg_borrador_i1/";
+    $ruta_i2="/proyecto/view/registracion/adrg_borrador_i2/";
     $ruta_expediente="/proyecto/view/registracion/expediente/";
     $sql_embebido = "SELECT embebidoid from adrg_borrador_i0 where baja = 0 and borradorid =". $_GET['id'];
     $row_borrador = $obj->fcGetSQL($sql_embebido,1,2);
     $control_ = "";
+    $control_resultado_final = "resultado_final.php?borradorid=";
     if ($row_borrador){
       $control_ = "show.php?id=";
     }
@@ -36,6 +38,17 @@
     else{
       $control_d="create.php?id=";
     }
+
+    $sql_origen = "SELECT origenid from adrg_borrador_i2 where baja= 0 and borradorid =". $_GET['id'];
+    $row_origen = $obj->fcGetSQL($sql_origen,1,2);
+    $control_o="";
+    if ($row_origen){
+      $control_o = "show.php?id=";
+    }
+    else{
+      $control_o="create.php?id=";
+    }
+
 ?>
 <section id="borrador" class="about">
       <div class="container" data-aos="fade-up">
@@ -80,8 +93,10 @@
 
     $query_0 = "SELECT '".$ruta_i0.$control_."' as url, 'bx bx-archive' as icon";
     $query_1 = "SELECT '".$ruta_i3.$control_p."' as url, 'bx bx-user' as icon";
-    $query_2 = "SELECT '".$ruta_i1.$control_d."' as url, 'bx bx-run' as icon";
-    $query="SELECT * FROM (".$query_0." UNION ALL ".$query_1." UNION ALL ".$query_2.") AS derived_table_alias";
+    $query_2 = "SELECT '".$ruta_i2.$control_o."' as url, 'bx bx-street-view' as icon";
+    $query_3 = "SELECT '".$ruta_i1.$control_d."' as url, 'bx bx-run' as icon";
+    $query_4 = "SELECT '".$ruta_expediente.$control_resultado_final."' as url, 'bx bx-search-alt' as icon";
+    $query="SELECT * FROM (".$query_0." UNION ALL ".$query_1." UNION ALL ".$query_2." UNION ALL ".$query_3." UNION ALL ".$query_4.") AS derived_table_alias";
     $control= $prueba->fcGetSQL($query,1,0);
 
    echo($prueba->configurar_grilla_personalizado(22,"baja = 0 and borradorid = ".$_GET['id'],$control));

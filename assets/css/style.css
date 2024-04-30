@@ -126,6 +126,15 @@ h6 {
   padding: 15px;
   overflow-y: auto;
 }
+#body h3 {
+  font-size: 36px;
+  font-weight: 700;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0 0 15px 0;
+}
+
 
 @media (max-width: 991px) {
   #header {
@@ -373,6 +382,7 @@ section {
   padding-bottom: 20px;
   position: relative;
   color: #45505b;
+  font-family: "Poppins", sans-serif;
 }
 
 .section-title h2::before {

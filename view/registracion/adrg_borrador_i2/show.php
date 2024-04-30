@@ -2,18 +2,18 @@
     require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/registracion/head/head.php");
     require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
     $obj= new db();
-    $ruta="/proyecto/view/registracion/adrg_borrador_i0/";
+    $ruta="/proyecto/view/registracion/adrg_borrador_i2/";
     $ruta_padre="/proyecto/view/registracion/adrg_borrador_h/";
     $ruta_raiz="/proyecto/";
 
-    $rows = $obj->fcGetSQL("SELECT * FROM adrg_borrador_i0  where borradorid =".$_GET['id'],1,2);
+    $rows = $obj->fcGetSQL("SELECT * FROM adrg_borrador_i2  where borradorid =".$_GET['id'],1,2);
 ?>
-<section id="embebido" class="about">
+<section id="origen" class="about">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Archivo Embebido</h2>
-          <p>Cargar y borrar un Archivo embebido</p>
+          <h2>Emisor del Expediente</h2>
+          <p>Cargar y borrar un origen de expendiente</p>
         </div>
 <div class="container" data-aos="fade-up">
    
@@ -46,11 +46,8 @@
 <?php
 
 
-$query_1 = "SELECT '".$ruta."reporte.php?id=' as url, 'bx bx-printer' as icon";
 
-$control= $prueba->fcGetSQL($query_1,1,0);
-
-echo($prueba->configurar_grilla_personalizado(23,"baja = 0 and borradorid = ".$_GET['id'],$control));
+echo($prueba->configurar_grilla_sin_control(25,"baja = 0 and borradorid = ".$_GET['id']));
 ?>
 </div>
 </div>
