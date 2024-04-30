@@ -4,7 +4,7 @@
      $ruta="/proyecto/view/registracion/expediente/";
      $ruta_borrador="/proyecto/view/registracion/adrg_borrador_h/";
      $prueba = new db();
-     $sql= "SELECT count(expedienteid) as cantidad from adrg_expediente_h where baja = 0 ";
+     $sql= "SELECT count(expedienteid) as cantidad from adrg_expediente_h where baja = 0 and usuarioid = ". $_SESSION['usuarioid'];
      $resultado = $prueba->fcGetSQL($sql,1,2);
      $mostrar_nuevo = 1;
      if ($resultado['cantidad'] > 0){
