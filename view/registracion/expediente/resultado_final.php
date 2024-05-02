@@ -36,9 +36,9 @@
   <div class="tab-pane fade show active" id="pills-borrador" role="tabpanel" aria-labelledby="pills-home-tab">
         <div class="table-responsive">
         <?php
-           $query = "SELECT '".$ruta."menu.php?id="."' as url, 'bx bx-archive' as icon";
+           $query = "SELECT '".$ruta."menu.php?id="."' as url, 'bx bx-archive' as icon, 'Generar el expediente.' as text";
            $control= $prueba->fcGetSQL($query,1,0);
-          echo($prueba->configurar_grilla_personalizado_junto(22, $where,$control));
+          echo($prueba->configurar_grilla_personalizado_junto_descipcion(22, $where,$control));
         ?>
         </div>
 
@@ -63,9 +63,9 @@
   <div class="tab-pane fade" id="pills-ajunto" role="tabpanel" aria-labelledby="pills-profile-tab">
             <div class="table-responsive">
                 <?php
-                    $query_1 = "SELECT '".$ruta_adjunto."reporte.php?id=' as url, 'bx bx-printer' as icon";
+                    $query_1 = "SELECT '".$ruta_adjunto."reporte.php?id=' as url, 'bx bx-printer' as icon, 'Visualizar archivo embebido' as text";
                     $control= $prueba->fcGetSQL($query_1,1,0);
-                    echo($prueba->configurar_grilla_personalizado_junto(23,$where,$control));
+                    echo($prueba->configurar_grilla_personalizado_junto_descipcion(23,$where,$control));
                 ?>
                 </div>
 
@@ -73,9 +73,9 @@
   <div class="tab-pane fade" id="pills-persona" role="tabpanel" aria-labelledby="pills-profile-tab">
   <div class="table-responsive">
                 <?php
-                    $query_1 = "SELECT '".$ruta_persona."reporte.php?id=' as url, 'bx bx-printer' as icon";
+                    $query_1 = "SELECT '".$ruta_persona."reporte.php?id=' as url, 'bx bx-printer' as icon, 'Visualizar documento adjuntado de la persona externa.' as text";
                     $control= $prueba->fcGetSQL($query_1,1,0); 
-                    echo($prueba->configurar_grilla_personalizado_junto(27,$where,$control));
+                    echo($prueba->configurar_grilla_personalizado_junto_descipcion(27,$where,$control));
                 ?>
               
 

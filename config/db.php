@@ -740,6 +740,141 @@
             }
         }
 
+        public function configurar_grilla_personalizado_descripcion($grillaid,$condicion,$controles){
+            try{
+                $sql = "SELECT * FROM syma_grilla_h where grillaid=".$grillaid;
+                $lagrilla = $this->fcGetSQL($sql,1,2);
+                $sql_1 = "SELECT * FROM syma_grilla_i0 where visible = 1 and baja = 0 and grillaid =".$grillaid;
+                $sql_1.= " ORDER BY visibleindex ";
+                $items = $this->fcGetSQL($sql_1,1,0);
+               
+                $columnas="";
+                $datos="";
+                $select = "SELECT ";
+                $configuracion='<table id="tablax_'.$lagrilla['grillaid'].'" class="display nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                    <th>Acciones</th>
+                    ';
+                 if ($items): 
+                    foreach($items as $row): 
+                        $columnas.='<th>'.$row['caption'].'</th>
+                        ';
+                        //debemos recorrer los datos para encontrar los datos de cada columna.
+                        $select.=''.$row['fieldname'].',';
+
+                    endforeach;
+                else:
+                 return '';
+                endif; 
+                $select= substr($select, 0, -1);
+                $sql_2 =  $select." FROM ".$lagrilla['tabla']." WHERE ".$condicion;
+                $losdatos= $this->fcGetSQL($sql_2,1,0);
+                $configuracion.=$columnas."</tr> 
+                </thead>
+                <tbody> 
+                ";
+                $i=0;
+                if ($losdatos) {
+                    foreach($losdatos as $row_d): 
+                        $i=0;      
+                        $configuracion.='<tr>
+                        <th>';
+                        foreach($controles as $elcontrol){
+                        $configuracion.= '
+                                            <a href="'.$elcontrol[0].$row_d[0].'" data-toggle="tooltip" data-placement="top" title="'.$elcontrol[2].'"><i class="'.$elcontrol[1].'"></i></a>';
+                                        
+                        }
+                        $configuracion.='
+                      
+                        </th>
+                        ';
+                        foreach($items as $row){
+                            if($row['combolistaid']){
+                                if($row['combolistaid'] != 0){
+                                    //$configuracion.="<td>".$row_d[$i]."</td>
+                                    //";
+                                    $configuracion.= "<td>".$this->configurar_lista_grilla($row['combolistaid'],$row_d[$i])."</td>
+                                    ";
+                                   
+                                }
+                                else {
+                                    $configuracion.="<td>".$row_d[$i]."</td>
+                                    ";   
+                                } 
+                            }
+                            else {
+                                $configuracion.="<td>".$row_d[$i]."</td>
+                                ";   
+                            }
+                            $i = $i+ 1;
+                        }
+                        $configuracion.="
+                        </tr>
+                        ";
+                    endforeach; }
+
+                    $i = $i -1;
+                $configuracion.="</tbody>
+                </table>
+                ";
+                $configuracion.=' <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+                <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js">
+                </script>      
+                <script src="https://cdn.datatables.net/responsive/3.0.1/js/dataTables.responsive.js">
+                </script>
+                <script src="https://cdn.datatables.net/responsive/3.0.1/js/responsive.dataTables.js">
+                </script>';
+                $configuracion.=" 
+                <script>
+                    $(document).ready(function () {
+                    $('#tablax_".$lagrilla['grillaid']."').DataTable({
+                     scrollY: 350,
+                    language: {";
+                $configuracion.= ' processing: "Tratamiento en curso...",
+                    search: "Buscar:",
+                    lengthMenu: "Agrupar por: _MENU_ items",
+                    info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                    infoEmpty: "No existen datos.",
+                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron datos con tu busqueda",
+                    emptyTable: "No hay datos disponibles en la tabla.",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultimo"
+                             },
+                        aria: {
+                         sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                            }
+                        },
+                        responsive: true,
+                        columnDefs: [
+                                    { responsivePriority: 1, targets: 0 },
+                                    { responsivePriority: 10001, targets:'. $i.'},
+                                    { responsivePriority: 2, targets: -2 }
+                                    ],
+                        lengthMenu: [ [5, 10, 25, -1], [5, 10, 25, "All"] ]
+         
+                        });
+                        });
+                        </script>
+                        ';
+                
+                return $configuracion; 
+            }
+            catch(PDOException $e) 
+            {
+                 
+                return "Error: " . $e->getMessage();
+            }
+        }
+
+
         public function configurar_grilla_sin_control($grillaid,$condicion){
             try{
                 $sql = "SELECT * FROM syma_grilla_h where grillaid=".$grillaid;
@@ -1060,6 +1195,138 @@
                         foreach($controles as $elcontrol){
                         $configuracion.= '
                                             <a href="'.$elcontrol[0].$row_d[0].'"><i class="'.$elcontrol[1].'"></i></a>';
+                        }
+                        $configuracion.='
+                      
+                        </th>
+                        ';
+                        foreach($items as $row){
+                            if($row['combolistaid']){
+                                if($row['combolistaid'] != 0){
+                                    //$configuracion.="<td>".$row_d[$i]."</td>
+                                    //";
+                                    $configuracion.= "<td>".$this->configurar_lista_grilla($row['combolistaid'],$row_d[$i])."</td>
+                                    ";
+                                   
+                                }
+                                else {
+                                    $configuracion.="<td>".$row_d[$i]."</td>
+                                    ";   
+                                } 
+                            }
+                            else {
+                                $configuracion.="<td>".$row_d[$i]."</td>
+                                ";   
+                            }
+                            $i = $i+ 1;
+                        }
+                        $configuracion.="
+                        </tr>
+                        ";
+                    endforeach; }
+
+                    $i = $i -1;
+                $configuracion.="</tbody>
+                </table>
+                ";
+                $configuracion.=' <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+                <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js">
+                </script>      
+                <script src="https://cdn.datatables.net/responsive/3.0.1/js/dataTables.responsive.js">
+                </script>
+                <script src="https://cdn.datatables.net/responsive/3.0.1/js/responsive.dataTables.js">
+                </script>';
+                $configuracion.=" 
+                <script>
+                    $(document).ready(function () {
+                    $('#tablax_".$lagrilla['grillaid']."').DataTable({
+                    language: {";
+                $configuracion.= ' processing: "Tratamiento en curso...",
+                    search: "Buscar:",
+                    lengthMenu: "Agrupar por: _MENU_ items",
+                    info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                    infoEmpty: "No existen datos.",
+                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron datos con tu busqueda",
+                    emptyTable: "No hay datos disponibles en la tabla.",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultimo"
+                             },
+                        aria: {
+                         sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                            }
+                        },
+                        responsive: true,
+                        columnDefs: [
+                                    { responsivePriority: 1, targets: 0 },
+                                    { responsivePriority: 10001, targets:'. $i.'},
+                                    { responsivePriority: 2, targets: -2 }
+                                    ],
+                        lengthMenu: [ [5, 10, 25, -1], [5, 10, 25, "All"] ]
+         
+                        });
+                        });
+                        </script>
+                        ';
+                
+                return $configuracion; 
+            }
+            catch(PDOException $e) 
+            {
+                 
+                return "Error: " . $e->getMessage();
+            }
+        }
+
+        public function configurar_grilla_personalizado_junto_descipcion($grillaid,$condicion,$controles){
+            try{
+                $sql = "SELECT * FROM syma_grilla_h where grillaid=".$grillaid;
+                $lagrilla = $this->fcGetSQL($sql,1,2);
+                $sql_1 = "SELECT * FROM syma_grilla_i0 where visible = 1 and baja = 0 and grillaid =".$grillaid;
+                $sql_1.= " ORDER BY visibleindex ";
+                $items = $this->fcGetSQL($sql_1,1,0);
+               
+                $columnas="";
+                $datos="";
+                $select = "SELECT ";
+                $configuracion='<table id="tablax_'.$lagrilla['grillaid'].'" class="display nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                    <th>Acciones</th>
+                    ';
+                 if ($items): 
+                    foreach($items as $row): 
+                        $columnas.='<th>'.$row['caption'].'</th>
+                        ';
+                        //debemos recorrer los datos para encontrar los datos de cada columna.
+                        $select.=''.$row['fieldname'].',';
+
+                    endforeach;
+                else:
+                 return '';
+                endif; 
+                $select= substr($select, 0, -1);
+                $sql_2 =  $select." FROM ".$lagrilla['tabla']." WHERE ".$condicion;
+                $losdatos= $this->fcGetSQL($sql_2,1,0);
+                $configuracion.=$columnas."</tr> 
+                </thead>
+                <tbody> 
+                ";
+                $i=0;
+                if ($losdatos) {
+                    foreach($losdatos as $row_d): 
+                        $i=0;      
+                        $configuracion.='<tr>
+                        <th>';
+                        foreach($controles as $elcontrol){
+                        $configuracion.= '
+                         <a href="'.$elcontrol[0].$row_d[0].'" data-toggle="tooltip" data-placement="top" title="'.$elcontrol[2].'"><i class="'.$elcontrol[1].'"></i></a>';
                         }
                         $configuracion.='
                       

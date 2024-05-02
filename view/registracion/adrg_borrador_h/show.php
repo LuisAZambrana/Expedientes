@@ -91,15 +91,15 @@
     //echo($obj->configurar_grilla_sin_control(22," baja = 0 and borradorid =".$_GET['id']));
    
 
-    $query_0 = "SELECT '".$ruta_i0.$control_."' as url, 'bx bx-archive' as icon";
-    $query_1 = "SELECT '".$ruta_i3.$control_p."' as url, 'bx bx-user' as icon";
-    $query_2 = "SELECT '".$ruta_i2.$control_o."' as url, 'bx bx-street-view' as icon";
-    $query_3 = "SELECT '".$ruta_i1.$control_d."' as url, 'bx bx-run' as icon";
-    $query_4 = "SELECT '".$ruta_expediente.$control_resultado_final."' as url, 'bx bx-search-alt' as icon";
+    $query_0 = "SELECT '".$ruta_i0.$control_."' as url, 'bx bx-archive' as icon, 'Adjuntar archivo' as text";
+    $query_1 = "SELECT '".$ruta_i3.$control_p."' as url, 'bx bx-user' as icon, 'Cargar persona externa' as text";
+    $query_2 = "SELECT '".$ruta_i2.$control_o."' as url, 'bx bx-street-view' as icon, 'Cargar origen del expediente' as text";
+    $query_3 = "SELECT '".$ruta_i1.$control_d."' as url, 'bx bx-run' as icon, 'Cargar destino del expediente' as text";
+    $query_4 = "SELECT '".$ruta_expediente.$control_resultado_final."' as url, 'bx bx-search-alt' as icon, 'Visualizar los datos del expediente a generar' as text";
     $query="SELECT * FROM (".$query_0." UNION ALL ".$query_1." UNION ALL ".$query_2." UNION ALL ".$query_3." UNION ALL ".$query_4.") AS derived_table_alias";
     $control= $prueba->fcGetSQL($query,1,0);
 
-   echo($prueba->configurar_grilla_personalizado(22,"baja = 0 and borradorid = ".$_GET['id'],$control));
+   echo($prueba->configurar_grilla_personalizado_descripcion(22,"baja = 0 and borradorid = ".$_GET['id'],$control));
 
 
 ?>
