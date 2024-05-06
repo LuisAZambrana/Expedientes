@@ -1,5 +1,5 @@
 <?php
-        require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/seguridad/head/head.php");
+        require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/registracion/head/head.php");
       require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
      $ruta="/proyecto/view/registracion/adrg_borrador_i0/";
      $prueba = new db();

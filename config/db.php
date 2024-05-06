@@ -449,7 +449,7 @@
                             $configuracion.= ' aria-disabled="true" data-bs-toggle="modal" data-bs-target="#exampleModal" ';
                         }
                         else{
-                            $configuracion.=' href="'.$ruta.'show.php?id='.$row_d[0].'"
+                            $configuracion.=' href="'.$ruta.'show.php?id='.$this->codificar_valor($row_d[0],1).'"
                             ';
                         }
                         $configuracion.='><i class="bx bx-folder-open"></i></a>';
@@ -467,7 +467,7 @@
                             $configuracion.= ' aria-disabled="true" data-bs-toggle="modal" data-bs-target="#exampleModal" ';
                         }
                         else{
-                            $configuracion.= 'href="'.$ruta.'edit.php?id='.$row_d[0].'"';
+                            $configuracion.= 'href="'.$ruta.'edit.php?id='.$this->codificar_valor($row_d[0],1).'"';
                         }
                         $configuracion.='><i class="bx bx-folder"></i></a>
                         ';
@@ -492,7 +492,7 @@
                                           </div>
                                           <div class="modal-footer">
                                                       <a  class="btn btn-success" data-bs-dismiss="modal">Cancelar</a>
-                                                      <a href="'.$ruta.'delete.php?id='. $row_d[0].'" type="button" class="btn btn-danger">Eliminar</a>
+                                                      <a href="'.$ruta.'delete.php?id='.$this->codificar_valor($row_d[0],1).'" type="button" class="btn btn-danger">Eliminar</a>
                                           </div>
                                     </div>
                               </div>
@@ -677,8 +677,8 @@
                         <th>';
                         foreach($controles as $elcontrol){
                         $configuracion.= '
-                                            <a href="'.$elcontrol[0].$row_d[0].'"><i class="'.$elcontrol[1].'"></i></a>';
-                        }
+                                            <a href="'.$elcontrol[0].$this->codificar_valor($row_d[0],1).'"><i class="'.$elcontrol[1].'"></i></a>';
+                                        }
                         $configuracion.='
                       
                         </th>
@@ -809,8 +809,11 @@
                         $configuracion.='<tr>
                         <th>';
                         foreach($controles as $elcontrol){
-                        $configuracion.= '
-                                            <a href="'.$elcontrol[0].$row_d[0].'" data-toggle="tooltip" data-placement="top" title="'.$elcontrol[2].'"><i class="'.$elcontrol[1].'"></i></a>';
+                          
+                                $configuracion.= '
+                                <a href="'.$elcontrol[0].$this->codificar_valor($row_d[0],1).'" data-toggle="tooltip" data-placement="top" title="'.$elcontrol[2].'"><i class="'.$elcontrol[1].'"></i></a>';
+                            
+                      
                                         
                         }
                         $configuracion.='
@@ -1354,7 +1357,7 @@
                         <th>';
                         foreach($controles as $elcontrol){
                         $configuracion.= '
-                         <a href="'.$elcontrol[0].$row_d[0].'" data-toggle="tooltip" data-placement="top" title="'.$elcontrol[2].'"><i class="'.$elcontrol[1].'"></i></a>';
+                         <a href="'.$elcontrol[0].$this->codificar_valor($row_d[0],1).'" data-toggle="tooltip" data-placement="top" title="'.$elcontrol[2].'"><i class="'.$elcontrol[1].'"></i></a>';
                         }
                         $configuracion.='
                       
@@ -1889,5 +1892,54 @@
             }  
    
         }
+
+        public function codificar_valor($valor, $entrada)
+        {  
+            try
+            {
+             
+            if($entrada == 1){
+                $nuevo = base64_encode('exp_'.$valor.'_chimpay');
+              
+                return $nuevo;
+            }
+            else
+            {$temp = base64_decode($valor);
+             $temp = str_replace('exp_','',$temp);
+             $temp = str_replace('_chimpay','',$temp);   
+             //return $temp;
+             if (is_numeric($temp)){return $temp;}else{ header("Location:/proyecto/error.php");}
+            }
+        }
+        catch(Exception $e) 
+        {  
+            header("Location:/proyecto/error.php");
+        }
+        }
+
+        function encrypt($plaintext, $key) {
+            $ivlen = openssl_cipher_iv_length($cipher="AES-128-CBC");
+            $iv = openssl_random_pseudo_bytes($ivlen);
+            $ciphertext_raw = openssl_encrypt($plaintext, $cipher, $key, $options=OPENSSL_RAW_DATA, $iv);
+            $hmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary=true);
+            $ciphertext = base64_encode( $iv.$hmac.$ciphertext_raw );
+            return $ciphertext;
+        }
+        
+        // Función para descifrar un texto
+        function decrypt($ciphertext, $key) {
+            $c = base64_decode($ciphertext);
+            $ivlen = openssl_cipher_iv_length($cipher="AES-128-CBC");
+            $iv = substr($c, 0, $ivlen);
+            $hmac = substr($c, $ivlen, $sha2len=32);
+            $ciphertext_raw = substr($c, $ivlen+$sha2len);
+            $original_plaintext = openssl_decrypt($ciphertext_raw, $cipher, $key, $options=OPENSSL_RAW_DATA, $iv);
+            $calcmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary=true);
+            if (hash_equals($hmac, $calcmac)) {
+                return $original_plaintext;
+            }
+            return false;
+        }
+        
     }
 ?>

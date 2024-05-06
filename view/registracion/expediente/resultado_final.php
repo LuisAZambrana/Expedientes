@@ -6,6 +6,7 @@
      $ruta_persona="/proyecto/view/registracion/adrg_borrador_i3/";
      $ruta_borrador="/proyecto/view/registracion/adrg_borrador_h/";
      $prueba = new db();
+     $_GET['borradorid']= $prueba->codificar_valor($_GET['borradorid'],0);
      $where = "baja = 0 and borradorid =".$_GET['borradorid'];
 
 ?>

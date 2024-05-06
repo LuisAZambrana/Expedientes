@@ -5,8 +5,8 @@
     $ruta="/proyecto/view/registracion/adrg_borrador_i0/";
     $ruta_padre="/proyecto/view/registracion/adrg_borrador_h/";
     $ruta_raiz="/proyecto/";
-
-    $rows = $obj->fcGetSQL("SELECT * FROM adrg_borrador_i0  where borradorid =".$_GET['id'],1,2);
+    $_valorid= $_SESSION['id'];
+    $rows = $obj->fcGetSQL("SELECT * FROM adrg_borrador_i0  where borradorid =".$_valorid,1,2);
 ?>
 <section id="embebido" class="about">
       <div class="container" data-aos="fade-up">
@@ -20,7 +20,7 @@
 
    
 <div class="pb-3">
-<a href="<? echo($ruta_padre."show.php?id=".$_GET['id']) ?>" class="btn btn-primary"> Regresar </a>
+<a href="<? echo($ruta_padre."show.php?id=".$obj->codificar_valor($_GET['id'],1)) ?>" class="btn btn-primary"> Regresar </a>
 <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"> Eliminar </a>
 <!-- Button trigger modal -->
 <!-- Modal -->
@@ -36,7 +36,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
-                  <a href="<?= $ruta ?>delete.php?id=<?= $_GET['id']?>" type="button" class="btn btn-danger">Eliminar!</a>
+                  <a href="<?= $ruta ?>delete.php?id=<?= $obj->codificar_valor($rows['borradorid'],1)?>" type="button" class="btn btn-danger">Eliminar!</a>
                   </div>
         </div>
       </div>
@@ -46,14 +46,14 @@
 <?php
 
 
-$query_1 = "SELECT '".$ruta."reporte.php?id=' as url, 'bx bx-printer' as icon";
+$query_1 = "SELECT '".$ruta."reporte.php?id=' as url, 'bx bx-printer' as icon, 'Visualizar reporte' as text, 0 as valor";
 
 $control= $prueba->fcGetSQL($query_1,1,0);
 
-echo($prueba->configurar_grilla_personalizado(23,"baja = 0 and borradorid = ".$_GET['id'],$control));
+echo($prueba->configurar_grilla_personalizado_descripcion(23,"baja = 0 and borradorid = ".$_valorid,$control));
 ?>
 </div>
 </div>
 <?php
-    require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/configuracion/head/fooder.php");
+    require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/registracion/head/fooder.php");
 ?>

@@ -13,7 +13,7 @@
      $el_row["usuarioid"]= $_SESSION['usuarioid'];
      $el_row["fecharegistro"]= date('Ymd');
      $prueba_1= $obj->ConfiguracionProcedimientoAlmacenado("adrg_borrador_h",1,$el_row);
-     if ($prueba_1 > 0) {header("Location:/proyecto/view/registracion/adrg_borrador_h/show.php?id=".$prueba_1);
+     if ($prueba_1 > 0) {header("Location:/proyecto/view/registracion/adrg_borrador_h/show.php?id=".$obj->codificar_valor( $prueba_1,1));
      }else{header("Location:crear.php");}
 
      ?>

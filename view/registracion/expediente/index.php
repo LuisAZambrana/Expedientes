@@ -30,14 +30,15 @@
  <?php   } 
 
 
-      $query_0 = "SELECT '".$ruta."show.php?id=' as url, 'bx bx-bell' as icon, 'Visualizar pases del expediente' as text";
-      $query_1 = "SELECT '".$ruta_borrador."create.php?id=' as url, 'bx bx-folder-plus' as icon, 'Crear un expediente' as text";
-      $query_2 = "SELECT '".$ruta."reporte.php?id=' as url, 'bx bx-printer' as icon, 'Imprimir expediente' as text";
+      $query_0 = "SELECT '".$ruta."show.php?id=' as url, 'bx bx-bell' as icon, 'Visualizar pases del expediente' as text, 0 as valor";
+      $query_1 = "SELECT '".$ruta_borrador."create.php?id=' as url, 'bx bx-folder-plus' as icon, 'Crear un expediente' as text, 0 as valor";
+      $query_2 = "SELECT '".$ruta."reporte.php?id=' as url, 'bx bx-printer' as icon, 'Imprimir expediente' as text, 0 as valor";
       $query="SELECT * FROM (".$query_0." UNION ALL ".$query_1." UNION ALL ".$query_2.") AS derived_table_alias";
       $control= $prueba->fcGetSQL($query,1,0);
      
 
      echo($prueba->configurar_grilla_personalizado_descripcion(26,"baja = 0 and usuarioid = ".$_SESSION['usuarioid'],$control));
+   
 ?>
 </div>
 </div>

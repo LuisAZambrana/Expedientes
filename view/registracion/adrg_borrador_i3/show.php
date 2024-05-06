@@ -20,7 +20,7 @@
 
    
 <div class="pb-3">
-<a href="<? echo($ruta_padre."show.php?id=".$_GET['id']) ?>" class="btn btn-primary"> Regresar </a>
+<a href="<? echo($ruta_padre."show.php?id=".$obj->codificar_valor($_GET['id'],1)) ?>" class="btn btn-primary"> Regresar </a>
 <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"> Eliminar </a>
 <!-- Button trigger modal -->
 <!-- Modal -->
@@ -36,7 +36,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
-                  <a href="<?= $ruta ?>delete.php?id=<?= $_GET['id']?>" type="button" class="btn btn-danger">Eliminar!</a>
+                  <a href="<?= $ruta ?>delete.php?id=<?= $obj->codificar_valor($_GET['id'],1)?>" type="button" class="btn btn-danger">Eliminar!</a>
                   </div>
         </div>
       </div>

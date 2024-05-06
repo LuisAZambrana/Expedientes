@@ -1,6 +1,7 @@
 <?php
      require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/registracion/head/head.php");
      require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
+     $db = new db();
      // archivo temporal (ruta y nombre).  
 ?> 
 <section id="menu" class="about">
@@ -69,7 +70,7 @@
       </div>
       <div>
             <button type="submit" class="btn btn-primary" name="subir">Guardar Persona</button>
-            <a class="btn btn-danger" href=<?php echo("/proyecto/view/registracion/adrg_borrador_h/show.php?id=".$_GET['id']) ?>> Cancelar </a>
+            <a class="btn btn-danger" href=<?php echo("/proyecto/view/registracion/adrg_borrador_h/show.php?id=".$db->codificar_valor($_GET['id'],1)) ?>> Cancelar </a>
       </div>
         </form>
     </div>

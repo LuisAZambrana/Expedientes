@@ -1,5 +1,5 @@
 <?php
-        require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/seguridad/head/head.php");
+        require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/registracion/head/head.php");
       require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
      $ruta="/proyecto/view/registracion/adrg_borrador_i0/";
      $prueba = new db();
@@ -16,7 +16,7 @@
        $query="SELECT * FROM (".$query_0." UNION ALL ".$query_1." UNION ALL ".$query_2.") AS derived_table_alias";
        $control= $prueba->fcGetSQL($query,1,0);
 
-      echo($prueba->configurar_grilla_personalizado(23,"baja = 0 and borradorid = ".$_GET['id'],$control));
+      echo($prueba->configurar_grilla_personalizado(23,"baja = 0 and borradorid = ".$prueba->codificar_valor($_GET['id'],1),$control));
 ?>
  </div>
 </div>

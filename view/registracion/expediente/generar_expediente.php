@@ -1,6 +1,7 @@
 <?php
    require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
     $conexion = new db();
+    //$_POST['borradorid']= $conexion->codificar_valor($_GET['borradorid'],0);
     $sql="SELECT * FROM adrg_expediente_h where baja = 0 and borradorid=".$_POST['borradorid'];
     $row = $conexion->fcGetSQL($sql,1,0);
 

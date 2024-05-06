@@ -31,6 +31,6 @@ session_start();
 $el_row["usuarioid"]= $_SESSION['usuarioid'];
 $el_row["fecharegistro"]= date('Ymd');
 $prueba_1= $db->ConfiguracionProcedimientoAlmacenado("adrg_borrador_i3",1,$el_row);
-if ($prueba_1 > 0) {header("Location:/proyecto/view/registracion/adrg_borrador_i3/show.php?id=".$_POST['borradorid']);
+if ($prueba_1 > 0) {header("Location:/proyecto/view/registracion/adrg_borrador_i3/show.php?id=".$db->codificar_valor($_POST['borradorid'],1));
 }else{header("Location:create.php");}
 ?>

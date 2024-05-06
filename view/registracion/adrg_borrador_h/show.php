@@ -8,7 +8,8 @@
     $ruta_i1="/proyecto/view/registracion/adrg_borrador_i1/";
     $ruta_i2="/proyecto/view/registracion/adrg_borrador_i2/";
     $ruta_expediente="/proyecto/view/registracion/expediente/";
-    $sql_embebido = "SELECT embebidoid from adrg_borrador_i0 where baja = 0 and borradorid =". $_GET['id'];
+    $_valorid = $_SESSION['id'];
+    $sql_embebido = "SELECT embebidoid from adrg_borrador_i0 where baja = 0 and borradorid =".$_valorid;
     $row_borrador = $obj->fcGetSQL($sql_embebido,1,2);
     $control_ = "";
     $control_resultado_final = "resultado_final.php?borradorid=";
@@ -19,7 +20,7 @@
       $control_="create.php?id=";
     }
     
-    $sql_persona = "SELECT adjuntoid from adrg_borrador_i3 where baja = 0 and borradorid =". $_GET['id'];
+    $sql_persona = "SELECT adjuntoid from adrg_borrador_i3 where baja = 0 and borradorid =". $_valorid;
     $row_persona = $obj->fcGetSQL($sql_persona,1,2);
     $control_p="";
     if ($row_persona){
@@ -29,7 +30,7 @@
       $control_p="create.php?id=";
     }
 
-    $sql_destino = "SELECT destinoid from adrg_borrador_i1 where baja= 0 and borradorid =". $_GET['id'];
+    $sql_destino = "SELECT destinoid from adrg_borrador_i1 where baja= 0 and borradorid =". $_valorid;
     $row_destino = $obj->fcGetSQL($sql_destino,1,2);
     $control_d="";
     if ($row_destino){
@@ -39,7 +40,7 @@
       $control_d="create.php?id=";
     }
 
-    $sql_origen = "SELECT origenid from adrg_borrador_i2 where baja= 0 and borradorid =". $_GET['id'];
+    $sql_origen = "SELECT origenid from adrg_borrador_i2 where baja= 0 and borradorid =".$_valorid;
     $row_origen = $obj->fcGetSQL($sql_origen,1,2);
     $control_o="";
     if ($row_origen){
@@ -63,7 +64,7 @@
    
 <div class="pb-3">
 <a href="<?php echo($ruta_expediente."index.php"); ?>" class="btn btn-primary"> Regresar </a>
-<a href="<?php echo($ruta."edit.php?id=".$_GET['id']); ?>" class="btn btn-success"> Actualizar borrador </a>
+<a href="<?php echo($ruta."edit.php?id=".$obj->codificar_valor($_GET['id'],1)); ?>" class="btn btn-success"> Actualizar borrador </a>
 <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"> Eliminar borrador </a>
 <!-- Button trigger modal -->
 <!-- Modal -->
@@ -79,7 +80,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
-                  <a href="<?= $ruta ?>delete.php?id=<?= $_GET['id']?>" type="button" class="btn btn-danger">Eliminar!</a>
+                  <a href="<?= $ruta ?>delete.php?id=<?= $obj->codificar_valor($_GET['id'],1)?>" type="button" class="btn btn-danger">Eliminar!</a>
                   </div>
         </div>
       </div>
@@ -91,15 +92,15 @@
     //echo($obj->configurar_grilla_sin_control(22," baja = 0 and borradorid =".$_GET['id']));
    
 
-    $query_0 = "SELECT '".$ruta_i0.$control_."' as url, 'bx bx-archive' as icon, 'Adjuntar archivo' as text";
-    $query_1 = "SELECT '".$ruta_i3.$control_p."' as url, 'bx bx-user' as icon, 'Cargar persona externa' as text";
-    $query_2 = "SELECT '".$ruta_i2.$control_o."' as url, 'bx bx-street-view' as icon, 'Cargar origen del expediente' as text";
-    $query_3 = "SELECT '".$ruta_i1.$control_d."' as url, 'bx bx-run' as icon, 'Cargar destino del expediente' as text";
-    $query_4 = "SELECT '".$ruta_expediente.$control_resultado_final."' as url, 'bx bx-search-alt' as icon, 'Visualizar los datos del expediente a generar' as text";
+    $query_0 = "SELECT '".$ruta_i0.$control_."' as url, 'bx bx-archive' as icon, 'Adjuntar archivo' as text, 0 as bandera";
+    $query_1 = "SELECT '".$ruta_i3.$control_p."' as url, 'bx bx-user' as icon, 'Cargar persona externa' as text, 0 as bandera";
+    $query_2 = "SELECT '".$ruta_i2.$control_o."' as url, 'bx bx-street-view' as icon, 'Cargar origen del expediente' as text, 0 as bandera";
+    $query_3 = "SELECT '".$ruta_i1.$control_d."' as url, 'bx bx-run' as icon, 'Cargar destino del expediente' as text, 0 as bandera";
+    $query_4 = "SELECT '".$ruta_expediente.$control_resultado_final."' as url, 'bx bx-search-alt' as icon, 'Visualizar los datos del expediente a generar' as text, 0 as bandera";
     $query="SELECT * FROM (".$query_0." UNION ALL ".$query_1." UNION ALL ".$query_2." UNION ALL ".$query_3." UNION ALL ".$query_4.") AS derived_table_alias";
     $control= $prueba->fcGetSQL($query,1,0);
 
-   echo($prueba->configurar_grilla_personalizado_descripcion(22,"baja = 0 and borradorid = ".$_GET['id'],$control));
+   echo($prueba->configurar_grilla_personalizado_descripcion(22,"baja = 0 and borradorid = ".$_valorid,$control));
 
 
 ?>

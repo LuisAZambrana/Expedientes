@@ -1,5 +1,5 @@
 <?php
-     require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/maestros/head/head.php");
+     require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/registracion/head/head.php");
 ?>
 <section id="expediente" class="about">
       <div class="container" data-aos="fade-up">
