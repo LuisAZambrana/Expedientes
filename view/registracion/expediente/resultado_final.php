@@ -32,12 +32,15 @@
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-persona" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Persona Externa</button>
   </li>
+  <li class="nav-item" role="presentation">
+    <a href=<?php echo("/proyecto/view/registracion/adrg_borrador_h/show.php?id=".$prueba->codificar_valor($_GET['borradorid'],1)); ?>" class="nav-link" type="button" aria-selected="false"><i class="bx bx-exit"></i></a>
+  </li>
 </ul>
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-borrador" role="tabpanel" aria-labelledby="pills-home-tab">
         <div class="table-responsive">
         <?php
-           $query = "SELECT '".$ruta."menu.php?id="."' as url, 'bx bx-archive' as icon, 'Generar el expediente.' as text";
+           $query = "SELECT '".$ruta."validacion_expediente.php?id="."' as url, 'bx bx-archive' as icon, 'Generar el expediente.' as text";
            $control= $prueba->fcGetSQL($query,1,0);
           echo($prueba->configurar_grilla_personalizado_junto_descipcion(22, $where,$control));
         ?>
@@ -78,11 +81,27 @@
                     $control= $prueba->fcGetSQL($query_1,1,0); 
                     echo($prueba->configurar_grilla_personalizado_junto_descipcion(27,$where,$control));
                 ?>
+                
               
 
-              </div>            </div>
+              </div>            
+            </div>
 </div>
-
+<div>
+<?php
+                    if (isset($_GET["mess"])){
+                      $mensaje_externo = $_GET["mess"];
+                      $el_mensaje =  $mensaje_externo ;
+                        ?>
+                          <div class="alert alert-danger" role="alert">
+                                           <strong>Para generar su Expediente!</strong><br>
+                                           <?php
+                                            echo($el_mensaje);
+                                           ?>
+                                          </div>
+<?php
+                    }?>
+</div>
 </div>
 </section>
 <?php

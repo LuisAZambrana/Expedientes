@@ -20,6 +20,11 @@ $el_row["baja"]= 0;
 $el_row["usuarioid"]= $_SESSION['usuarioid'];
 $el_row["fecharegistro"]= date('Ymd');
 $prueba_1= $db->ConfiguracionProcedimientoAlmacenado("adrg_borrador_i1",1,$el_row);
-if ($prueba_1 > 0) {header("Location:/proyecto/view/registracion/adrg_borrador_i1/show.php?id=".$db->codificar_valor($_POST['borradorid'],1));
+if ($prueba_1 > 0) {
+    $sql = "SELECT 'm' as abm, adrg_borrador_h.* FROM adrg_borrador_h WHERE borradorid=".$_POST['borradorid'];
+    $row_borrador = $db->fcGetSQL($sql,1,2);
+    $row_borrador['destino']= 1;
+    $prueba_2 = $db->ConfiguracionProcedimientoAlmacenado("adrg_borrador_h",1,$row_borrador);
+    header("Location:/proyecto/view/registracion/adrg_borrador_i1/show.php?id=".$db->codificar_valor($_POST['borradorid'],1));
 }else{header("Location:create.php");}
 ?>

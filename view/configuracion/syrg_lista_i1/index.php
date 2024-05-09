@@ -2,6 +2,7 @@
     require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/configuracion/head/head.php");
     require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
     $obj= new db();
+    $_GET['id']= $obj->codificar_valor( $_GET['id'],0);
     $sql="SELECT * FROM syrg_lista_h WHERE listaid=".$_GET['id'];
     $date= $obj->fcGetSQL($sql,1,2);
     $ruta="/proyecto/view/configuracion/syrg_lista_h/";

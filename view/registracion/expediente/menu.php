@@ -1,5 +1,8 @@
 <?php
      require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/registracion/head/head.php");
+     require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
+     $db = new db();
+     
 ?>
 <section id="expediente" class="about">
       <div class="container" data-aos="fade-up">
@@ -14,6 +17,17 @@
         <div class="col-sm-10">
         <input type="text" readonly class="form-control-plaintext fw-bold" id="borradorid" name="borradorid" value="<?= $_GET['id'] ?>">
         </div>
+        <?php 
+         if (isset($_GET["mess"])){ ?>
+           <div class="alert alert-primary" role="alert">
+                                           <strong>Para generar su Expediente!</strong><br>
+                                           <?php
+                                            echo($_GET["mess"]);
+                                           ?>
+                                          </div>
+        <?php
+         }
+        ?>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Importancia</label>
             <?php

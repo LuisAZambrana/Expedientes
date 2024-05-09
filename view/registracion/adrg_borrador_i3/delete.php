@@ -10,6 +10,10 @@
      $row["fecharegistro"]= date('Ymd');
      $resultado=$obj->ConfiguracionProcedimientoAlmacenado("adrg_borrador_i3",1,$row);
      if ($resultado > 0) {
+          $sql = "SELECT 'm' as abm, adrg_borrador_h.* FROM adrg_borrador_h WHERE borradorid=".$row['borradorid'];
+          $row_borrador =  $obj->fcGetSQL($sql,1,2);
+          $row_borrador['persona']= 0;
+          $prueba_2 =  $obj->ConfiguracionProcedimientoAlmacenado("adrg_borrador_h",1,$row_borrador);
           header("Location:/proyecto/view/registracion/adrg_borrador_h/show.php?id=".$obj->codificar_valor($row['borradorid'],1));
       }else{header("Location:show.php?id=".$resultado);}
 ?>

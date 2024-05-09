@@ -10,7 +10,7 @@
 <h2 class="text-center"> Administración de Listas </h2>
 <div class="container">
 <?php
-      echo($prueba->configurar_grilla_permisos(9,"baja = 0",$ruta,3,$usuarioid));
+      echo($prueba->configurar_grilla(9,"baja = 0",$ruta));
 ?>
 </div>
 </section>

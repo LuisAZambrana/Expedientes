@@ -1917,6 +1917,30 @@
         }
         }
 
+        public function codificar_valor_no_numero($valor, $entrada)
+        {  
+            try
+            {
+             
+            if($entrada == 1){
+                $nuevo = base64_encode('exp_'.$valor.'_chimpay');
+              
+                return $nuevo;
+            }
+            else
+            {$temp = base64_decode($valor);
+             $temp = str_replace('exp_','',$temp);
+             $temp = str_replace('_chimpay','',$temp);   
+             //return $temp;
+             return $temp;
+            }
+        }
+        catch(Exception $e) 
+        {  
+            header("Location:/proyecto/error.php");
+        }
+        }
+
         function encrypt($plaintext, $key) {
             $ivlen = openssl_cipher_iv_length($cipher="AES-128-CBC");
             $iv = openssl_random_pseudo_bytes($ivlen);
@@ -1939,6 +1963,100 @@
                 return $original_plaintext;
             }
             return false;
+        }
+
+        public function configurar_grilla_sin_control_junto_reporte($grillaid,$condicion){
+            try{
+                $sql = "SELECT * FROM syma_grilla_h where grillaid=".$grillaid;
+                $lagrilla = $this->fcGetSQL($sql,1,2);
+                $sql_1 = "SELECT * FROM syma_grilla_i0 where visible = 1 and baja = 0 and grillaid =".$grillaid;
+                $sql_1.= " ORDER BY visibleindex ";
+                $items = $this->fcGetSQL($sql_1,1,0);
+               
+                $columnas="";
+                $datos="";
+                $select = "SELECT ";
+                $configuracion='<table id="tablax_'.$lagrilla['grillaid'].'" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                 ';
+                 if ($items): 
+                    foreach($items as $row): 
+                        $columnas.='<th>'.$row['caption'].'</th>
+                        ';
+                        //debemos recorrer los datos para encontrar los datos de cada columna.
+                        $select.=''.$row['fieldname'].',';
+
+                    endforeach;
+                else:
+                 return '';
+                endif; 
+                $select= substr($select, 0, -1);
+                $sql_2 =  $select." FROM ".$lagrilla['tabla']." WHERE ".$condicion;
+                $losdatos= $this->fcGetSQL($sql_2,1,0);
+                $configuracion.=$columnas."</tr> 
+                </thead>
+                <tbody> 
+                ";
+                $i=0;
+                if ($losdatos) {
+                    foreach($losdatos as $row_d): 
+                        $i=0;      
+                        $configuracion.='<tr>
+                        ';
+                       
+                        foreach($items as $row){
+                            if($row['combolistaid']){
+                                if($row['combolistaid'] != 0){
+                                    //$configuracion.="<td>".$row_d[$i]."</td>
+                                    //";
+                                    $configuracion.= "<td>".$this->configurar_lista_grilla($row['combolistaid'],$row_d[$i])."</td>
+                                    ";
+                                   
+                                }
+                                else {
+                                    if ($row['html']== 1){
+                                        $configuracion.="<td><div>".htmlentities($row_d[$i])."</div></td>
+                                        ";  
+                                    }
+                                    else
+                                    {
+                                        $configuracion.="<td>".$row_d[$i]."</td>
+                                        ";   
+                                    }
+                                  
+                                } 
+                            }
+                            else {
+                                if ($row['html']== '1'){
+                                    $configuracion.="<td>".nl2br($row_d[$i])."</td>
+                                    "; 
+                                }
+                                else {
+                                    $configuracion.="<td>".$row_d[$i]."</td>
+                                    ";   
+                                }
+                               
+                            }
+                            $i = $i+ 1;
+                        }
+                        $configuracion.="
+                        </tr>
+                        ";
+                    endforeach; }
+
+                    $i = $i -1;
+                $configuracion.="</tbody>
+                </table>
+                ";
+               
+                return $configuracion; 
+            }
+            catch(PDOException $e) 
+            {
+                 
+                return "Error: " . $e->getMessage();
+            }
         }
         
     }

@@ -124,7 +124,7 @@ $(document).ready(function(){
     
       <div>
             <button type="submit" class="btn btn-primary" name="subir">Guardar Destino</button>
-            <a class="btn btn-danger" href=<?php echo("/proyecto/view/registracion/adrg_borrador_h/show.php?id=".$_GET['id']) ?>> Cancelar </a>
+            <a class="btn btn-danger" href=<?php echo("/proyecto/view/registracion/adrg_borrador_h/show.php?id=".$conexion->codificar_valor($_GET['id'],1)) ?>> Cancelar </a>
       </div>
         </form>
     </div>

@@ -2,6 +2,7 @@
      require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/registracion/head/head.php");
      require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
      // archivo temporal (ruta y nombre).  
+     $db= new db();
 ?> 
 <section id="menu" class="about">
       <div class="container" data-aos="fade-up">
@@ -25,6 +26,12 @@
       <input type="text" name="nombre_archivo" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
       <div id="emailHelp" class="form-text">Nombre Archivo</div>
       </div>
+
+      <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Folio</label>
+      <input type="text" name="folio" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <div id="emailHelp" class="form-text">Cantidad de hojas a presentar.</div>
+      </div>
     
       <div class="mb-3">
       <label for="formFile" class="form-label">Ingrese un archivo(PDF/JPG)</label>
@@ -32,7 +39,7 @@
       </div>
       <div>
             <button type="submit" class="btn btn-primary" name="subir">Guardar Archivo</button>
-            <a class="btn btn-danger" href=<?php echo("/proyecto/view/registracion/adrg_borrador_h/show.php?id=".$_GET['id']) ?>> Cancelar </a>
+            <a class="btn btn-danger" href=<?php echo("/proyecto/view/registracion/adrg_borrador_h/show.php?id=".$db->codificar_valor($_GET['id'],1)) ?>> Cancelar </a>
       </div>
         </form>
     </div>
