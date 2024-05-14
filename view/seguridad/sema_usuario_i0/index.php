@@ -33,7 +33,7 @@
         </div>
 <div>
    <?php
-        echo($obj->configurar_grilla_param_alta(19," baja = 0 and personaid = ".$_GET['id'],$ruta_i0,$_GET['id']));
+        echo($obj->configurar_grilla_param_alta(19," baja = 0 and personaid = ".$_GET['id'],$ruta_i0,$obj->codificar_valor($_GET['id'],1)));
    ?>
 </div>
 

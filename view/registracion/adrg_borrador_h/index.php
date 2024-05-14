@@ -17,8 +17,7 @@
 <?php
       $where = " and borradorid not in (select borradorid from adrg_expediente_h where baja = 0)";
       echo($prueba->configurar_grilla_permisos(22,"baja = 0 and usuarioid=".$_SESSION['usuarioid']. $where,$ruta,13,$_SESSION['usuarioid']));
-
-      
+     
 ?>
 </div>
 </div>

@@ -9,6 +9,6 @@
      $el_row["usuarioid"]= 12;
      $el_row["fecharegistro"]= date('Ymd');
      $prueba_1= $obj->ConfiguracionProcedimientoAlmacenado("sema_usuario_i1",1,$el_row);
-     if ($prueba_1 > 0) {header("Location:index.php?id=".$_POST["personaid"]);
-     }else{header("Location:crear.php?id=".$_POST["personaid"]);}
+     if ($prueba_1 > 0) {header("Location:index.php?id=". $obj->codificar_valor($_POST["personaid"],1));
+     }else{header("Location:crear.php?id=".$ob->codificar_valor($_POST["personaid"],1));}
      ?>

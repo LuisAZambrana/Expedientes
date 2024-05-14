@@ -16,6 +16,6 @@
      $el_row["usuarioid"]= 12;
      $el_row["fecharegistro"]= date('Ymd');
      $prueba_1= $obj->ConfiguracionProcedimientoAlmacenado("syrg_formulario_h",1,$el_row);
-     if ($prueba_1 > 0) {header("Location:/proyecto/view/configuracion/syrg_formulario_h/show.php?id=".$_POST["formularioid"]);
+     if ($prueba_1 > 0) {header("Location:/proyecto/view/configuracion/syrg_formulario_h/show.php?id=".$obj->codificar_valor($_POST["formularioid"],1));
      }else{header("Location:crear.php");}
      ?>

@@ -1,6 +1,23 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
 session_start();
+
+$tiempo_inactividad = 600; // 600 segundos = 10 minutos
+
+// Comprueba si la sesión está activa
+if (isset($_SESSION['ultimo_acceso']) && (time() - $_SESSION['ultimo_acceso']) > $tiempo_inactividad) {
+    // Si el tiempo de inactividad ha sido superado, destruye la sesión
+    session_unset();
+    session_destroy();
+    // Redirige al usuario a otra página o muestra un mensaje de inactividad
+    $url_s = "proyecto/logout.php?err=off";
+    header("Location: $url_s");
+}
+
+// Actualiza el tiempo de último acceso
+$_SESSION['ultimo_acceso'] = time();
+
+
 if (!empty($_SESSION["name"])) {
     $name = $_SESSION["name"];
     $usuarioid = $_SESSION["usuarioid"];
@@ -83,6 +100,7 @@ if (isset($_GET['id'])){
     require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
     $prueba = new db();
       echo($prueba->generar_menu($name,$usuarioid));
+    
     ?>
 
                             </header><!-- End Header -->

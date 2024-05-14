@@ -32,8 +32,8 @@
     </div> 
  
 <div class="pb-3">
-<a href="<? echo("index.php?id=".$date['personaid']) ?>" class="btn btn-primary"> Regresar </a>
-<a href="edit.php?id=<?= $date['perteneceid']?>" class="btn btn-success"> Actualizar </a>
+<a href="<? echo("index.php?id=". $obj->codificar_valor($date['personaid'],1)) ?>" class="btn btn-primary"> Regresar </a>
+<a href="edit.php?id=<?= $obj->codificar_valor($date['perteneceid'],1)?>" class="btn btn-success"> Actualizar </a>
 <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"> Eliminar </a>
 <!-- Button trigger modal -->
 <!-- Modal -->
@@ -49,7 +49,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
-                  <a href="delete.php?id=<?= $date['perteneceid']?>" type="button" class="btn btn-danger">Eliminar!</a>
+                  <a href="delete.php?id=<?= $obj->codificar_valor($date['perteneceid'],1)?>" type="button" class="btn btn-danger">Eliminar!</a>
                   </div>
         </div>
       </div>

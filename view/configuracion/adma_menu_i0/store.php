@@ -20,6 +20,6 @@ $el_row["baja"]= 0;
 $el_row["usuarioid"]= 12;
 $el_row["fecharegistro"]= date('Ymd');
 $prueba_1= $db->ConfiguracionProcedimientoAlmacenado("adma_menu_i0",1,$el_row);
-if ($prueba_1 > 0) {header("Location:index.php?id=".$_POST["menuid"]);
-}else{header("Location:crear.php?id=".$_POST["menuid"]);}
+if ($prueba_1 > 0) {header("Location:index.php?id=".$db->codificar_valor($_POST["menuid"],1));
+}else{header("Location:crear.php?id=".$db->codificar_valor($_POST["menuid"],1));}
 ?>

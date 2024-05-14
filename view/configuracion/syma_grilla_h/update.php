@@ -20,6 +20,6 @@
 
      $resultado=$obj->ConfiguracionProcedimientoAlmacenado("syma_grilla_h",1,$el_row);
     if ($resultado > 0) {
-          header("Location:show.php?id=".$_POST["grillaid"]);
+          header("Location:show.php?id=".$obj->codificar_valor($_POST["grillaid"],1));
       }else{header("Location:index.php");}
 ?>

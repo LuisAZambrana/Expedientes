@@ -37,6 +37,18 @@
 					<div class="text-primary">Si es un usuario registrado, inicie sesión aquí.</div>
 				</div>
 			</div>
+			<?php
+			if (! empty($_GET['err'])){
+				$el_mensaje = $_GET['err'];
+				?>
+				  <div class="alert alert-danger" role="alert">
+													   <strong>Alerta!</strong><br>
+													   <?php
+														echo("Perdida de Session!");
+													   ?>
+													  </div>
+			<?php }
+			?>
 		</div>
 	</div>
 </div>

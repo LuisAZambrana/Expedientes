@@ -55,14 +55,14 @@
     </div> 
 
 <div class="pb-3">
-    <a href=<? echo($ruta."show.php?id=".$_GET['id']); ?> class="btn btn-primary"> Regresar </a>
+   
+    <a href=<? echo($ruta."show.php?id=".$obj->codificar_valor($_GET['id'],1)); ?> class="btn btn-primary"> Regresar </a>
 </div>
         </div>
 <div>
    <?php
-   echo($obj->configurar_grilla_param_alta(8," baja = 0 and grillaid = ".$_GET['id'],$ruta_i0,$_GET['id']));
-   
-   ?>
+   echo($obj->configurar_grilla_param_alta(8," baja = 0 and grillaid = ".$_GET['id'],$ruta_i0,$obj->codificar_valor($_GET['id'],1)));
+    ?>
 </div>
 
     </div>

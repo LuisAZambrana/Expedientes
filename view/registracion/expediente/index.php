@@ -1,7 +1,9 @@
 <?php
      require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/registracion/head/head.php");
       require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
+    
      $ruta="/proyecto/view/registracion/expediente/";
+     $ruta_pase="/proyecto/view/registracion/adrg_expediente_i0/";
      $ruta_borrador="/proyecto/view/registracion/adrg_borrador_h/";
      $prueba = new db();
      $sql= "SELECT count(expedienteid) as cantidad from adrg_expediente_h where baja = 0 and usuarioid = ". $_SESSION['usuarioid'];
@@ -11,8 +13,6 @@
         $mostrar_nuevo = 0;
      }
     
- 
- 
 ?>
 <section id="expedientes" class="about">
 <div class="container" data-aos="fade-up">
@@ -30,8 +30,8 @@
  <?php   } 
 
 
-      $query_0 = "SELECT '".$ruta."show.php?id=' as url, 'bx bx-bell' as icon, 'Visualizar pases del expediente' as text, 0 as valor";
-      $query_1 = "SELECT '".$ruta_borrador."create.php?id=' as url, 'bx bx-folder-plus' as icon, 'Crear un expediente' as text, 0 as valor";
+      $query_0 = "SELECT '".$ruta_pase."show.php?pase=exp&id=' as url, 'bx bx-bell' as icon, 'Visualizar pases del expediente' as text, 0 as valor";
+      $query_1 = "SELECT '".$ruta_borrador."create.php?pase=exp&id=' as url, 'bx bx-folder-plus' as icon, 'Crear un expediente' as text, 0 as valor";
       $query_2 = "SELECT '".$ruta."reporte.php?id=' as url, 'bx bx-printer' as icon, 'Imprimir expediente' as text, 0 as valor";
       $query="SELECT * FROM (".$query_0." UNION ALL ".$query_1." UNION ALL ".$query_2.") AS derived_table_alias";
       $control= $prueba->fcGetSQL($query,1,0);

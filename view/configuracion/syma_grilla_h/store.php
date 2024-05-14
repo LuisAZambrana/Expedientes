@@ -20,6 +20,6 @@ $el_row["usuarioid"]= 12;
 $el_row["fecharegistro"]= date('Ymd');
 $prueba_1= $db->ConfiguracionProcedimientoAlmacenado("syma_grilla_h",1,$el_row);
 if ($prueba_1 > 0) {
-    header("Location:show.php?id=".$_POST["grillaid"]);
+    header("Location:show.php?id=".$db->codificar_valor($_POST["grillaid"],1));
 }else{header("Location:create.php");}
 ?>

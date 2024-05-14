@@ -18,7 +18,7 @@
 
         <div class="pb-3">
             <a href="/proyecto/view/configuracion/syma_grilla_h/index.php" class="btn btn-primary"> Regresar </a>
-            <a href="<?= $ruta ?>actualizar.php?id=<?= $date[1]?>" class="btn btn-success"> Actualizar </a>
+            <a href="<?= $ruta ?>actualizar.php?id=<?= $obj->codificar_valor($date[1],1)?>" class="btn btn-success"> Actualizar </a>
             <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"> Eliminar </a>
             <!-- Button trigger modal -->
             <!-- Modal -->
@@ -34,12 +34,12 @@
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
-                              <a href="<?= $ruta ?>delete.php?id=<?= $date[1]?>" type="button" class="btn btn-danger">Eliminar!</a>
+                              <a href="<?= $ruta ?>delete.php?id=<?= $obj->codificar_valor($date[1],1)?>" type="button" class="btn btn-danger">Eliminar!</a>
                               </div>
                     </div>
                   </div>
               </div>
-              <a href="<?= $ruta_i0 ?>generar_filas.php?id=<?= $_GET['id']?>" class="btn btn-success"> Generar columnas... </a>
+              <a href="<?= $ruta_i0 ?>generar_filas.php?id=<?= $obj->codificar_valor($_GET['id'],1)?>" class="btn btn-success"> Generar columnas... </a>
         </div>
 
     <table class="table container-fluid">
@@ -74,9 +74,9 @@
                         <th><?= $date[4] ?></th>
                         <th><?= $date[5] ?></th>
                         <td scope="col"><a href="<? if ($crear_datos):
-                                                      echo ($ruta_i0."create.php?id=".$date[0]);
+                                                      echo ($ruta_i0."create.php?id=".$obj->codificar_valor($date[0],1));
                                                     else:
-                                                      echo ($ruta_i0."index.php?id=".$date[1]);
+                                                      echo ($ruta_i0."index.php?id=".$obj->codificar_valor($date[1],1));
                                                     endif; ?>" class="btn btn-primary"> Cargar columnas.. </a></td>
                 
                 </tr>

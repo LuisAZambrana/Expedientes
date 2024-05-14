@@ -1,5 +1,7 @@
 <?php
      require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/configuracion/head/head.php");
+     require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
+     $db = new db();
 ?>
 <section id="items" class="about">
       <div class="container" data-aos="fade-up">
@@ -38,7 +40,7 @@
       </div> 
       </div> 
             <button type="submit" class="btn btn-primary">Guardar Item de Lista</button>
-            <a class="btn btn-danger" href=<? echo("/proyecto/view/configuracion/syrg_lista_i1/index.php?id=".$_GET['id']); ?>> Cancelar </a>
+            <a class="btn btn-danger" href=<? echo("/proyecto/view/configuracion/syrg_lista_i1/index.php?id=".$db->codificar_valor($_GET['id'],1)); ?>> Cancelar </a>
         </form>
     </div>
     </section><!-- End About Section -->

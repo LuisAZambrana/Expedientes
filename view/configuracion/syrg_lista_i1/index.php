@@ -2,7 +2,6 @@
     require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/configuracion/head/head.php");
     require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
     $obj= new db();
-    $_GET['id']= $obj->codificar_valor( $_GET['id'],0);
     $sql="SELECT * FROM syrg_lista_h WHERE listaid=".$_GET['id'];
     $date= $obj->fcGetSQL($sql,1,2);
     $ruta="/proyecto/view/configuracion/syrg_lista_h/";
@@ -29,12 +28,12 @@
         </div>
     </div>
 <div class="pb-3">
-    <a href=<? echo($ruta."show.php?id=".$_GET['id']); ?> class="btn btn-primary"> Regresar </a>
+    <a href=<? echo($ruta."show.php?id=".$obj->codificar_valor($_GET['id'],1)); ?> class="btn btn-primary"> Regresar </a>
 </div>
         </div>
 <div>
    <?php
-   echo($obj->configurar_grilla_param_alta(11," baja = 0 and listaid = ".$_GET['id'],$ruta_i0,$_GET['id']));
+   echo($obj->configurar_grilla_param_alta(11," baja = 0 and listaid = ".$_GET['id'],$ruta_i0,$obj->codificar_valor($_GET['id'],1)));
    ?>
 </div>
 

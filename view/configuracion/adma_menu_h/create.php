@@ -55,7 +55,7 @@
       <div id="emailHelp" class="form-text">Ingrese si es: Back End</div>
       </div>
             <button type="submit" class="btn btn-primary">Guardar Menú</button>
-            <a class="btn btn-danger" href="/proyecto/index.php#listas"> Cancelar </a>
+            <a class="btn btn-danger" href="/proyecto/view/configuracion/adma_menu_h/index.php"> Cancelar </a>
         </form>
     </div>
     </section><!-- End About Section -->

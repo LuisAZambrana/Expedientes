@@ -39,7 +39,7 @@
         <div id="emailHelp" class="form-text">Activo</div>
         </div> 
             <button type="submit" class="btn btn-primary">Guardar Sector</button>
-            <a class="btn btn-danger" href=<? echo("/proyecto/view/seguridad/sema_usuario_i1/index.php?id=".$_GET['id']); ?>> Cancelar </a>
+            <a class="btn btn-danger" href=<? echo("/proyecto/view/seguridad/sema_usuario_i1/index.php?id=".$objecto->codificar_valor($_GET['id'],1)); ?>> Cancelar </a>
         </form>
     </div>
     </section><!-- End About Section -->

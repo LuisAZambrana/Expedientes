@@ -15,6 +15,6 @@
      $el_row["usuarioid"]= 12;
      $el_row["fecharegistro"]= date('Ymd');
      $prueba_1= $obj ->ConfiguracionProcedimientoAlmacenado("adma_menu_h",1,$el_row);
-     if ($prueba_1 > 0) {header("Location:/proyecto/view/configuracion/adma_menu_h/show.php?id=".$_POST["menuhorizontalid"]);
+     if ($prueba_1 > 0) {header("Location:/proyecto/view/configuracion/adma_menu_h/show.php?id=".$obj->codificar_valor($_POST["menuhorizontalid"],1));
      }else{header("Location:crear.php");}
      ?>

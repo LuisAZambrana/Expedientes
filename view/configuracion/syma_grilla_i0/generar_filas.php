@@ -1,6 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
 $conexion = new db();
+$_GET['id']= $conexion->codificar_valor($_GET['id'],0);
 $sql="SELECT * FROM syma_grilla_h WHERE grillaid =". $_GET['id'];
 $grilla= $conexion->fcGetSQL($sql,1,2);
 $sql = "SELECT 'a' as abm, syma_grilla_i0.* FROM syma_grilla_i0 WHERE itemid = -1";
@@ -34,6 +35,7 @@ foreach($lascolumnas as $value) {
     $row['usuarioid']= 12;
     $row["fecharegistro"]= date('Ymd');
     $resultado = $conexion->ConfiguracionProcedimientoAlmacenado("syma_grilla_i0",1,$row);
+    $_GET['id']= $conexion->codificar_valor($_GET['id'],1);
     if ($resultado = 0){
         header("Location:index.php?id=". $_GET['id']);
     }

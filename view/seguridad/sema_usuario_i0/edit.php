@@ -37,7 +37,7 @@
             </div>
     <div>
         <input type="submit" class="btn btn-success" value="Actualizar">
-        <a href="show.php?id=<?= $date['asociacionid'] ?>" class="btn btn-danger">Cancelar</a>
+        <a href="show.php?id=<?= $objecto->codificar_valor($date['asociacionid'],1) ?>" class="btn btn-danger">Cancelar</a>
     </div>
 </form>
       </div>

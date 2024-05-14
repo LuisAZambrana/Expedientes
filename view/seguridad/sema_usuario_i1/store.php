@@ -11,8 +11,8 @@ $el_row["baja"]= 0;
 $el_row["usuarioid"]= 12;
 $el_row["fecharegistro"]= date('Ymd');
 $prueba_1= $db->ConfiguracionProcedimientoAlmacenado("sema_usuario_i1",1,$el_row);
-if ($prueba_1 > 0) {header("Location:index.php?id=".$_POST["personaid"]);}
+if ($prueba_1 > 0) {header("Location:index.php?id=".$db->codificar_valor($_POST["personaid"],1));}
 else{
-    header("Location:crear.php?id=".$_POST["personaid"]);
+    header("Location:crear.php?id=".$db->codificar_valor($_POST["personaid"],1));
 }
 ?>

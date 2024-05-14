@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/controller/tbl_member_controller.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
+$db = new db();
 $obj = new tbl_member_controller();
 if ($_POST["password"] != $_POST["confirmar"]) 
   {

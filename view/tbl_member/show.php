@@ -1,6 +1,8 @@
 <?php
     require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/head/head.php");
     require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/controller/tbl_member_controller.php");
+    require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
+    $db=new db();
     $obj= new tbl_member_controller();
     $date = $obj->show($_GET['id']);
     $ruta="/proyecto/view/tbl_member/";
@@ -16,8 +18,8 @@
         </div>
 
         <div class="pb-3">
-            <a href="/proyecto/index.php#usuarios" class="btn btn-primary"> Regresar </a>
-            <a href="<?= $ruta ?>edit.php?id=<?= $date[0]?>" class="btn btn-success"> Actualizar </a>
+            <a href="/proyecto/view/tbl_member/index.php" class="btn btn-primary"> Regresar </a>
+            <a href="<?= $ruta ?>edit.php?id=<?= $db->codificar_valor($date[0],1)?>" class="btn btn-success"> Actualizar </a>
             <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"> Eliminar </a>
             <!-- Button trigger modal -->
             <!-- Modal -->
@@ -33,7 +35,7 @@
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
-                              <a href="<?= $ruta ?>delete.php?id=<?= $date[0]?>" type="button" class="btn btn-danger">Eliminar</a>
+                              <a href="<?= $ruta ?>delete.php?id=<?= $db->codificar_valor($date[0],1)?>" type="button" class="btn btn-danger">Eliminar</a>
                               </div>
                     </div>
                   </div>

@@ -1,5 +1,8 @@
 <?php
      require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/head/head.php");
+     require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
+     $db= new db();
+
      if (isset($_GET["err"]))
       {
             $mensaje = $_GET["err"];
@@ -74,7 +77,7 @@
                           $_SESSION["_confirmar"]=null;
                         } ?>
                   <button type="submit" class="btn btn-primary">Guardar persona</button>
-                  <a class="btn btn-danger" href="/proyecto/index.php#usuarios"> Cancelar </a>
+                  <a class="btn btn-danger" href="/proyecto/view/tbl_member/index.php"> Cancelar </a>
             </form>
       </div>
     </section><!-- End About Section -->

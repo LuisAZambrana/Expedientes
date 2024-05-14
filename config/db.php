@@ -290,11 +290,11 @@
                         <th>
                         <a';
                         
-                        $configuracion.=' href="'.$ruta.'show.php?id='.$row_d[0].'"><i class="bx bx-folder-open"></i></a>
+                        $configuracion.=' href="'.$ruta.'show.php?id='.$this->codificar_valor($row_d[0],1).'"><i class="bx bx-folder-open"></i></a>
                         <a href="'.$ruta.'create.php"><i class="bx bx-folder-plus"></i></a>
-                        <a href="'.$ruta.'edit.php?id='.$row_d[0].'"><i class="bx bx-folder"></i></a>
-                        <a data-bs-toggle="modal" data-bs-target="#exampleModal'.$row_d[0].'"><i class="bx bx-folder-minus"></i></a>
-                        <div class="modal fade" id="exampleModal'.$row_d[0].'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <a href="'.$ruta.'edit.php?id='.$this->codificar_valor($row_d[0],1).'"><i class="bx bx-folder"></i></a>
+                        <a data-bs-toggle="modal" data-bs-target="#exampleModal'.$this->codificar_valor($row_d[0],1).'"><i class="bx bx-folder-minus"></i></a>
+                        <div class="modal fade" id="exampleModal'.$this->codificar_valor($row_d[0],1).'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog">
                                     <div class="modal-content">
                                           <div class="modal-header">
@@ -306,7 +306,7 @@
                                           </div>
                                           <div class="modal-footer">
                                                       <a  class="btn btn-success" data-bs-dismiss="modal">Cancelar</a>
-                                                      <a href="'.$ruta.'delete.php?id='. $row_d[0].'" type="button" class="btn btn-danger">Eliminar</a>
+                                                      <a href="'.$ruta.'delete.php?id='.$this->codificar_valor($row_d[0],1).'" type="button" class="btn btn-danger">Eliminar</a>
                                           </div>
                                     </div>
                               </div>
@@ -1487,11 +1487,11 @@
                         $i=0;
                         $configuracion.='<tr>
                         <th>
-                        <a href="'.$ruta.'show.php?id='.$row_d[0].'"><i class="bx bx-folder-open"></i></a>
+                        <a href="'.$ruta.'show.php?id='.$this->codificar_valor($row_d[0],1).'"><i class="bx bx-folder-open"></i></a>
                         <a href="'.$ruta.'create.php?id='.$condicion_alta.'"><i class="bx bx-folder-plus"></i></a>
-                        <a href="'.$ruta.'edit.php?id='.$row_d[0].'"><i class="bx bx-folder"></i></a>
-                        <a data-bs-toggle="modal" data-bs-target="#exampleModal'.$row_d[0].'"><i class="bx bx-folder-minus"></i></a>
-                        <div class="modal fade" id="exampleModal'.$row_d[0].'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <a href="'.$ruta.'edit.php?id='.$this->codificar_valor($row_d[0],1).'"><i class="bx bx-folder"></i></a>
+                        <a data-bs-toggle="modal" data-bs-target="#exampleModal'.$this->codificar_valor($row_d[0],1).'"><i class="bx bx-folder-minus"></i></a>
+                        <div class="modal fade" id="exampleModal'.$this->codificar_valor($row_d[0],1).'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog">
                                     <div class="modal-content">
                                           <div class="modal-header">
@@ -1503,7 +1503,7 @@
                                           </div>
                                           <div class="modal-footer">
                                                       <a  class="btn btn-success" data-bs-dismiss="modal">Cancelar</a>
-                                                      <a href="'.$ruta.'delete.php?id='. $row_d[0].'" type="button" class="btn btn-danger">Eliminar</a>
+                                                      <a href="'.$ruta.'delete.php?id='.$this->codificar_valor($row_d[0],1).'" type="button" class="btn btn-danger">Eliminar</a>
                                           </div>
                                     </div>
                               </div>
@@ -2058,6 +2058,7 @@
                 return "Error: " . $e->getMessage();
             }
         }
+
         
     }
 ?>

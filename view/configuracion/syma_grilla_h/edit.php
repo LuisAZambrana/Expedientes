@@ -85,7 +85,7 @@
             
     <div>
         <input type="submit" class="btn btn-success" value="Actualizar">
-        <a href="show.php?id=<?= $date[1] ?>" class="btn btn-danger">Cancelar</a>
+        <a href="show.php?id=<?= $obj->codificar_valor($date[1],1) ?>" class="btn btn-danger">Cancelar</a>
     </div>
 </form>
       </div>

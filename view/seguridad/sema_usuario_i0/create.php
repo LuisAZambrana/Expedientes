@@ -35,7 +35,7 @@
         </div>
         
             <button type="submit" class="btn btn-primary">Guardar Rol</button>
-            <a class="btn btn-danger" href=<? echo("/proyecto/view/seguridad/sema_usuario_i0/index.php?id=".$_GET['id']); ?>> Cancelar </a>
+            <a class="btn btn-danger" href=<? echo("/proyecto/view/seguridad/sema_usuario_i0/index.php?id=". $obj->codificar_valor($_GET['id'],1)); ?>> Cancelar </a>
         </form>
     </div>
     </section><!-- End About Section -->

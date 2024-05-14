@@ -1,6 +1,8 @@
 <?php
     require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/head/head.php");
     require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/controller/tbl_member_controller.php");
+    require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
+    $db = new db();
     $obj= new tbl_member_controller();
     $date = $obj->show($_GET['id']);
 ?>
@@ -39,7 +41,7 @@
             </div>
            
                 <input type="submit" class="btn btn-success" value="Actualizar">
-                <a href="show.php?id=<?= $date[0] ?>" class="btn btn-danger">Cancelar</a>
+                <a href="show.php?id=<?= $db->codificar_valor($date[0],1) ?>" class="btn btn-danger">Cancelar</a>
             </div>
         </form>
       </div>

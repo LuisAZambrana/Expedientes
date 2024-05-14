@@ -13,6 +13,6 @@ $el_row["baja"]= 0;
 $el_row["usuarioid"]= 12;
 $el_row["fecharegistro"]= date('Ymd');
 $prueba_1= $db->ConfiguracionProcedimientoAlmacenado("syrg_lista_i1",1,$el_row);
-if ($prueba_1 > 0) {header("Location:index.php?id=".$_POST["listaid"]);
-}else{header("Location:crear.php?id=".$_POST["listaid"]);}
+if ($prueba_1 > 0) {header("Location:index.php?id=".$db->codificar_valor($_POST["listaid"],1));
+}else{header("Location:crear.php?id=".$db->codificar_valor($_POST["listaid"],1));}
 ?>
