@@ -32,8 +32,9 @@
 
       $query_0 = "SELECT '".$ruta_pase."show.php?pase=exp&id=' as url, 'bx bx-bell' as icon, 'Visualizar pases del expediente' as text, 0 as valor";
       $query_1 = "SELECT '".$ruta_borrador."create.php?pase=exp&id=' as url, 'bx bx-folder-plus' as icon, 'Crear un expediente' as text, 0 as valor";
-      $query_2 = "SELECT '".$ruta."reporte.php?id=' as url, 'bx bx-printer' as icon, 'Imprimir expediente' as text, 0 as valor";
-      $query="SELECT * FROM (".$query_0." UNION ALL ".$query_1." UNION ALL ".$query_2.") AS derived_table_alias";
+      $query_2 = "SELECT '".$ruta."reporte.php?id=' as url, 'bx bx-printer' as icon, 'Imprimir comprobante de inicio de Expediente' as text, 0 as valor";
+      $query_3 = "SELECT '".$ruta."resultado_expediente.php?pase=exp&id=' as url, 'bx bx-briefcase-alt-2' as icon, 'Contenido del expediente' as text, 0 as valor";
+      $query="SELECT * FROM (".$query_0." UNION ALL ".$query_1." UNION ALL ".$query_2." UNION ALL ".$query_3.") AS derived_table_alias";
       $control= $prueba->fcGetSQL($query,1,0);
      
 

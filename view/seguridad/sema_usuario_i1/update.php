@@ -1,7 +1,7 @@
 <?php
      require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
      $obj = new db();
-     $el_row = $obj->fcGetSQL("SELECT 'm' as abm, sema_usuario_i0.* FROM sema_usuario_i1 WHERE perteneceid =".$_POST['listaitemid'],1,2);
+     $el_row = $obj->fcGetSQL("SELECT 'm' as abm, sema_usuario_i1.* FROM sema_usuario_i1 WHERE perteneceid =".$_POST['perteneceid'],1,2);
      $el_row["abm"]="m";
      $el_row["sectorid"]=$_POST["sectorid"];
      $el_row["activo"]=  isset($_POST["activo"])? $_POST["activo"]:0;

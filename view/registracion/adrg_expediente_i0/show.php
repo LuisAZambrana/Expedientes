@@ -17,7 +17,7 @@
       $index="index.php";
     }
     else{
-      $index="index_p.php";
+      $index="index_u.php";
     }
            
     }

@@ -57,7 +57,7 @@
  
 </div>
 <?php
-    echo($obj->configurar_grilla_sin_control(19," baja = 0 and personaid=".$_GET['id']));
+    echo($obj->configurar_grilla_sin_control(19," baja = 0 and personaid=".$date['personaid']));
 ?>
 
 </div>

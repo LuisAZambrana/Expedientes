@@ -35,11 +35,13 @@ foreach($lascolumnas as $value) {
     $row['usuarioid']= 12;
     $row["fecharegistro"]= date('Ymd');
     $resultado = $conexion->ConfiguracionProcedimientoAlmacenado("syma_grilla_i0",1,$row);
-    $_GET['id']= $conexion->codificar_valor($_GET['id'],1);
+  
     if ($resultado = 0){
-        header("Location:index.php?id=". $_GET['id']);
+     
+        header("Location:index.php?id=".$conexion->codificar_valor($_GET['id'],1));
     }
     $index= $index + 1;
 }
- header("Location:index.php?id=". $_GET['id']);
+
+ header("Location:index.php?id=".$conexion->codificar_valor($_GET['id'],1));
 ?>

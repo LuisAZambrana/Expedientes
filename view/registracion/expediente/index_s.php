@@ -24,12 +24,13 @@
 
       $query_0 = "SELECT '".$ruta_pase."show.php?pase=sector&id=' as url, 'bx bx-bell' as icon, 'Visualizar pases del expediente' as text, 0 as valor";
       $query_1 = "SELECT '".$ruta_pase."create.php?pase=sector&id=' as url, 'bx bx-folder-plus' as icon, 'Crear un pase' as text, 0 as valor";
-      $query_2 = "SELECT '".$ruta."reporte.php?id=' as url, 'bx bx-printer' as icon, 'Imprimir expediente' as text, 0 as valor";
-      $query="SELECT * FROM (".$query_0." UNION ALL ".$query_1." UNION ALL ".$query_2.") AS derived_table_alias";
+      $query_2 = "SELECT '".$ruta."resultado_expediente.php?pase=sector&id=' as url, 'bx bx-briefcase-alt-2' as icon, 'Contenido del expediente' as text, 0 as valor";
+      $query_3 = "SELECT '".$ruta."finalizar_expediente.php?pase=sector&id=' as url, 'bx bx-archive-out' as icon, 'Finalizar y dar respuesta a un Expediente' as text, 0 as valor";
+      $query="SELECT * FROM (".$query_0." UNION ALL ".$query_1." UNION ALL ".$query_2." UNION ALL ".$query_3.") AS derived_table_alias";
       $control= $prueba->fcGetSQL($query,1,0);
      
 
-     echo($prueba->configurar_grilla_personalizado_descripcion(29,"tipo_destinoid = 2 and sectorid_destino = ".$_sectorid,$control));
+     echo($prueba->configurar_grilla_personalizado_descripcion(29,"tipo_destinoid = 2 and not(estadoid = 3) and sectorid_destino = ".$_sectorid,$control));
    
 ?>
 </div>

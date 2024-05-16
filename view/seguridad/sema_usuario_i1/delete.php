@@ -1,7 +1,8 @@
 <?php
      require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/config/db.php");
      $obj = new db();
-     $row = $obj->fcgetSql("SELECT 'm' as abm, sema_usuario_i0.* from sema_usuario_i0 where asociacionid =".$_GET['id'],1,2);
+     $_GET['id'] = $obj->codificar_valor( $_GET['id'],0);
+     $row = $obj->fcgetSql("SELECT 'm' as abm, sema_usuario_i1.* from sema_usuario_i0 where asociacionid =".$_GET['id'],1,2);
      $row["baja"]=1;
      $row["usuarioid"]= 2122;
      $row["fecharegistro"]= date('Ymd');
