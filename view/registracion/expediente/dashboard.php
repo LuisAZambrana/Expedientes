@@ -255,8 +255,11 @@
                 data: labels.map(label => {
                     return cantidadesPorSector[sector][label] || 0;
                 }),
-                backgroundColor: getRandomColor()
+                //backgroundColor: getRandomColor()
+              
             });
+            datasets.backgroundColor = ['#3c8dbc', '#f56954'],
+            datasets.borderWidth = 1
            
         });
 
@@ -268,14 +271,19 @@
                 datasets: datasets
             },
             options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        stacked: true
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
                     }
-                   
                 }
-            }
+            
         });
     });
 
@@ -315,8 +323,8 @@
                        echo($cadena);
                        ?> 
                     ],
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56','#1284ff'],
-                    hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56','#1284ff'],
+                        backgroundColor: ['rgba(54, 162, 235, 0.2)','rgba(11, 15, 84, 0)','rgba(105, 110, 100, 0.37)', 'rgba(9, 182, 229, 0.69)'],
+                    borderColor: ['rgba(54, 162, 235, 1)'],
                     borderWidth: 1
                 }]
             },
