@@ -2059,6 +2059,15 @@
             }
         }
 
-        
+       
+        public function fcgetParametro($parametroid){
+            $sql = "SELECT fcParametro(".$parametroid.") as valor";
+            $dato = $this->fcGetSQL($sql,1,2);
+            $resultado= $dato['valor'];
+            return $resultado;
+
+        }
+
+
     }
 ?>
