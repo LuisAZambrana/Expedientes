@@ -6,7 +6,7 @@
 /* Template 2 style */
 .sidenav {
 	height: 100%;
-	overflow-x: hidden;
+	overflow-x: auto;
 	padding-top: 20px;
 	background-image: url('../../images/side-nav-bg.jpg');
 }

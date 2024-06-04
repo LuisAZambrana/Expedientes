@@ -83,16 +83,28 @@ if ($prueba_1 > 0) {
                     <p>Por favor no responder este mensaje!</p>
             <?php
              $html=ob_get_clean();
-            
-             header("Location:/proyecto/view/registracion/expediente/".$index.'?e='. $elmail->enviar_mail('c1931794.ferozo.com',
-    'expedientes@chimpay.gob.ar',
-    'L4/r3c0ntr4c0Nch4delal0r4s3c4',
-     465,
-    'expediente',
-    $el_row["email_informado"],
-    $nombre_apellido,
-    $asunto_expediente,
-    $html));
+
+             $sql_mail = "SELECT 'a' as abm, adrg_expediente_j0.* FROM adrg_expediente_j0 WHERE mailid = -1";
+             $row_mail = $db->fcGetSQL($sql_mail,1,0);
+             $row_mail['abm'] = 'a';
+             $row_mail['paseid'] = $prueba_1;
+             $row_mail['servidorsmtp'] = 'c1931794.ferozo.com';
+             $row_mail['usuario_nombre'] = 'expedientes@chimpay.gob.ar';
+             $row_mail['contrasenia'] = 'L4/r3c0ntr4c0Nch4delal0r4s3c4';
+             $row_mail['puerto'] = 465;
+             $row_mail['remplazo_origen'] = 'expediente';
+             $row_mail['destinatario'] =  $el_row["email_informado"];
+             $row_mail['remplazo_destino'] = $nombre_apellido;
+             $row_mail['asunto'] = $asunto_expediente;
+             $row_mail['mensaje'] =  $html;
+             $row_mail['baja'] =  0;
+             $row_mail['usuarioid'] =  $_SESSION['usuarioid'];
+
+             $mail_para_enviar = $db->ConfiguracionProcedimientoAlmacenado('adrg_expediente_j0',1,$row_mail);
+
+          
+
+             header("Location:/proyecto/view/registracion/expediente/".$index.'?el_mail='. $db->codificar_valor($mail_para_enviar,1));
             
             }    
             else

@@ -11,7 +11,7 @@
      $sql_sector_descripcion = "SELECT sector , sum(cantidad) as cantidad from v_expedientes_sector group by sector ";
      $vista = $prueba->fcGetSQL($sql_sector_descripcion,1,0);
 
-     $sql_sector_descripcion_1 = "SELECT * from v_expedientes_sector";
+     $sql_sector_descripcion_1 = "SELECT * from v_expedientes_sector ORDER BY anio, mes";
      $vista_1 = $prueba->fcGetSQL($sql_sector_descripcion_1,1,0);
 
      $sql_sector_descripcion = "SELECT anio , sum(cantidad) as cantidad from v_expedientes_sector group by anio ";

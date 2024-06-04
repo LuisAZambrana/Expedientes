@@ -3,7 +3,7 @@
 ?>
 
 <section id="sector" class="about">
-      <div class="container" data-aos="fade-up">
+      <div class="container" data-aos="fade-up" >
 
         <div class="section-title">
           <h2>Crear Borrador</h2>

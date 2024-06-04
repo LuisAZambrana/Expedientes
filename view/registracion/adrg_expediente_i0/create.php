@@ -107,7 +107,7 @@ $(document).ready(function(){
           <p>Genere un pase para el Expediente</p>
           
         </div>
-        <form action="store.php" method="POST" autocomplet="off" >
+        <form id="formulario" action="store.php" method="POST" autocomplet="off" >
         
         <div class="mb-3 row" >
         <label for="staticEmail" class="col-sm-2 col-form-label">Id</label>
@@ -155,6 +155,8 @@ $(document).ready(function(){
         </form>
     </div>
     </section><!-- End About Section -->
+
+
 <?php
       require_once($_SERVER['DOCUMENT_ROOT']."/proyecto/view/configuracion/head/fooder.php");
 ?>
